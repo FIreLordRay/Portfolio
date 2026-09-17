@@ -17,36 +17,100 @@
 
   <main>
     <section id="hero">
-      <h1>RayMond Hall</h1>
-      <p class="tagline">Aspiring Software Developer - i.c.stars</p>
+      <img class="hero-mark" src="flr-crown.png" alt="FireLordRay crown logo">
+      <h1 class="hyper-text">RayMond Hall</h1>
+      <p class="tagline">Aspiring Software Developer &mdash; i.c.stars</p>
+      <div class="hero-actions">
+        <div class="glow-button-container"><a class="btn" href="#projects">View projects</a></div>
+        <a class="btn secondary" href="#contact">Get in touch</a>
+      </div>
     </section>
 
     <section id="about">
       <h2>About Me</h2>
-      <p>I am an aspiring software developer with a passion for creating innovative solutions. I am currently learning various programming languages and frameworks to build my skills.</p>
+      <div class="card">
+        <p>I am an aspiring software developer with a passion for creating innovative solutions. I am currently learning various programming languages and frameworks to build my skills.</p>
+      </div>
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
-      <div class="project">
-        <h3>Project Title</h3>
-        <p>What it does and what you built.</p>
-      </div>
-      <div class="project">
-        <h3>Project Title</h3>
-        <p>What it does and what you built.</p>
+      <div class="projects-grid">
+        <div class="project card">
+          <h3>Raybot &mdash; Self-Growing Python Practice Bot</h3>
+          <p>A self-hosted Python learning platform with a Discord bot, a Flask web dashboard, and a tool-using AI chat agent, all sharing one SQLite curriculum. When learners run out of practice problems, a local LLM (via Ollama) generates new ones and has to prove its own solution passes its own tests before it's ever shown to anyone. Includes streaks, achievement badges, a leaderboard, an activity heatmap, live code grading, and an "Ask Raybot" tutor.</p>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>Discord.py</span>
+            <span>Flask</span>
+            <span>SQLite</span>
+            <span>Ollama</span>
+          </div>
+          <p style="margin-top: 4px;"><a href="https://github.com/FIreLordRay/raybot">View on GitHub &rarr;</a></p>
+        </div>
+        <div class="project card">
+          <h3>RayChat &mdash; Local Tool-Calling AI Agent</h3>
+          <p>A local AI chat agent that runs entirely against Ollama on your own machine &mdash; no API key, nothing leaves the box. Instead of guessing at answers, it calls real tools: it executes Python code and reports the actual result, with every tool call and its raw output shown transparently in the chat transcript. The server is stateless, the tool loop is capped to avoid runaway calls, and it degrades gracefully with a clear status message if Ollama isn't running.</p>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>Flask</span>
+            <span>Ollama</span>
+            <span>Tool-Calling</span>
+          </div>
+          <p style="margin-top: 4px;"><a href="https://github.com/FIreLordRay/raybot">View on GitHub &rarr;</a></p>
+        </div>
+        <div class="project card">
+          <h3>Medline Operations Problem Navigator <span style="color: var(--accent); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em;">In progress</span></h3>
+          <p>My current internship project at i.c.stars (Cycle 60) &mdash; a navigator built for Medline to track and surface operational incidents across branches, turning scattered problem reports into something a team can actually work from.</p>
+        </div>
       </div>
     </section>
 
     <section id="contact">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:rhall@icstars.org">rhall@icstars.org</a></p>
-      <p>GitHub: <a href="https://github.com/FireLordRay">github.com/FireLordRay</a></p>
+      <div class="card">
+        <p>Email: <a href="mailto:rhall@icstars.org">rhall@icstars.org</a></p>
+        <p>GitHub: <a href="https://github.com/FireLordRay">github.com/FireLordRay</a></p>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2026 RayMond Hall</p>
   </footer>
+
+  <script>
+    // HyperText (ported from magicui's HyperText: scramble-reveal on hover)
+    document.addEventListener('DOMContentLoaded', function () {
+      var HYPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      document.querySelectorAll('.hyper-text').forEach(function (el) {
+        var original = el.textContent;
+        var animating = false;
+        el.addEventListener('mouseenter', function () {
+          if (animating) return;
+          animating = true;
+          var duration = 500;
+          var start = performance.now();
+          var len = original.length;
+          (function frame(now) {
+            var progress = Math.min((now - start) / duration, 1);
+            var revealCount = progress * len;
+            var out = '';
+            for (var i = 0; i < len; i++) {
+              var ch = original[i];
+              out += ch === ' ' ? ' ' : (i <= revealCount ? ch.toUpperCase() : HYPER_CHARS[Math.floor(Math.random() * HYPER_CHARS.length)]);
+            }
+            el.textContent = out;
+            if (progress < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              el.textContent = original.toUpperCase();
+              animating = false;
+            }
+          })(start);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
