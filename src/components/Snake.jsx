@@ -23,26 +23,72 @@ function placeFood(snake) {
   return free.length ? free[Math.floor(Math.random() * free.length)] : null
 }
 
-/** The fire trailing off the tail: embers that cool from gold to orange to deep red as they burn out. */
+/**
+ * The fire on the tail: a looping Lottie flame (fire.json, from LottieFiles) sitting on the
+ * tail, with embers that cool from gold to orange to deep red as they burn out. Until the
+ * flame has loaded, or if it can't, the embers burn on their own.
+ */
 const FLAME_COLORS = ['#fbbf24', '#f59e0b', '#c2410c']
-const FLAMES_PER_FRAME = 2
+const FIRE_FPS = 24 // the Lottie flame's own frame rate
+const FIRE_PX = 96 // each flame frame is pictured this big, then scaled onto the board
+const FIRE_SIZE = CELL * 3 // how big the flame stands on the board
 
-/** New embers just behind the tail, thrown back away from the body and up. */
-function spawnFlames(flames, snake) {
+/** Where the tail ends, in board pixels, and the way it points (away from the body). */
+function tailEnd(snake) {
   const tail = snake[snake.length - 1]
   const before = snake[snake.length - 2] ?? tail
-  const away = { x: tail.x - before.x, y: tail.y - before.y } // the way the tail points
-  for (let i = 0; i < FLAMES_PER_FRAME; i++) {
+  const away = { x: tail.x - before.x, y: tail.y - before.y }
+  return { x: (tail.x + 0.5 + away.x * 0.4) * CELL, y: (tail.y + 0.5 + away.y * 0.4) * CELL, away }
+}
+
+/** New embers just behind the tail, thrown back away from the body and up. With the Lottie flame on, fewer and smaller: sparks. */
+function spawnFlames(flames, snake, sparks) {
+  const end = tailEnd(snake)
+  const count = sparks ? (Math.random() < 0.5 ? 1 : 0) : 2
+  for (let i = 0; i < count; i++) {
     const life = 18 + Math.random() * 14
     flames.push({
-      x: (tail.x + 0.5 + away.x * 0.4) * CELL + (Math.random() - 0.5) * CELL * 0.6,
-      y: (tail.y + 0.5 + away.y * 0.4) * CELL + (Math.random() - 0.5) * CELL * 0.6,
-      vx: away.x * 0.6 + (Math.random() - 0.5) * 0.5,
-      vy: away.y * 0.6 - 0.3 - Math.random() * 0.4,
-      size: CELL * (0.3 + Math.random() * 0.15),
+      x: end.x + (Math.random() - 0.5) * CELL * 0.6,
+      y: end.y + (Math.random() - 0.5) * CELL * 0.6 - (sparks ? CELL * 0.8 : 0),
+      vx: end.away.x * 0.6 + (Math.random() - 0.5) * 0.5,
+      vy: end.away.y * 0.6 - 0.3 - Math.random() * 0.4,
+      size: CELL * (0.3 + Math.random() * 0.15) * (sparks ? 0.45 : 1),
       life,
       max: life,
     })
+  }
+}
+
+/**
+ * Loads the Lottie flame and plays it once, off screen, keeping a picture of every frame so the
+ * game can stamp them on the board without running the player each frame.
+ */
+async function loadFireFrames() {
+  const [{ default: lottie }, { default: animationData }] = await Promise.all([
+    import('lottie-web/build/player/lottie_light_canvas'),
+    import('../assets/fire.json'),
+  ])
+  const holder = document.createElement('div')
+  holder.setAttribute('aria-hidden', 'true')
+  holder.style.cssText = `position:fixed;left:-9999px;top:0;width:${FIRE_PX}px;height:${FIRE_PX}px`
+  document.body.append(holder)
+  try {
+    const anim = lottie.loadAnimation({ container: holder, renderer: 'canvas', loop: false, autoplay: false, animationData })
+    await new Promise((resolve) => anim.addEventListener('DOMLoaded', resolve))
+    const source = holder.querySelector('canvas')
+    const frames = []
+    for (let f = 0; f < anim.totalFrames; f++) {
+      anim.goToAndStop(f, true)
+      const frame = document.createElement('canvas')
+      frame.width = source.width
+      frame.height = source.height
+      frame.getContext('2d').drawImage(source, 0, 0)
+      frames.push(frame)
+    }
+    anim.destroy()
+    return frames
+  } finally {
+    holder.remove()
   }
 }
 
@@ -65,6 +111,7 @@ export default function Snake({ className = '' }) {
   const canvas = useRef(null)
   const game = useRef(null) // the snake, its heading and the food: changes every tick, so not state
   const flames = useRef([]) // the embers behind the tail: change every frame
+  const fire = useRef(null) // the Lottie flame's frames, once loaded
   const [score, setScore] = useState(0)
   const [status, setStatus] = useState('idle') // idle | playing | over
 
@@ -109,10 +156,39 @@ export default function Snake({ className = '' }) {
     ctx.globalCompositeOperation = 'source-over'
     ctx.globalAlpha = 1
 
+    // The Lottie flame stands on the tail, base first, while the snake is alive.
+    if (fire.current && !g.over) {
+      const end = tailEnd(g.snake)
+      const frame = fire.current[Math.floor(performance.now() / (1000 / FIRE_FPS)) % fire.current.length]
+      ctx.drawImage(frame, end.x - FIRE_SIZE / 2, end.y - FIRE_SIZE * 0.93, FIRE_SIZE, FIRE_SIZE)
+    }
+
     g.snake.forEach((part, i) => {
       ctx.fillStyle = i === 0 ? color('--color-fg', '#f7f2ec') : color('--color-ember', '#c2410c')
       ctx.fillRect(part.x * CELL + 1, part.y * CELL + 1, CELL - 2, CELL - 2)
     })
+  }, [])
+
+  // Fetch the Lottie flame once the page is idle, and only where the game shows (it's hidden on
+  // phones) and motion is welcome. If it fails, the embers carry on alone.
+  useEffect(() => {
+    const wide = window.matchMedia('(min-width: 768px)').matches
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!wide || calm) return
+    let cancelled = false
+    const load = () =>
+      loadFireFrames()
+        .then((frames) => {
+          if (!cancelled) fire.current = frames
+        })
+        .catch(() => {})
+    const idle = 'requestIdleCallback' in window
+    const handle = idle ? window.requestIdleCallback(load, { timeout: 3000 }) : setTimeout(load, 1500)
+    return () => {
+      cancelled = true
+      if (idle) window.cancelIdleCallback(handle)
+      else clearTimeout(handle)
+    }
   }, [])
 
   // Paint every frame while a game runs, so the flame flickers smoothly between the snake's
@@ -124,7 +200,7 @@ export default function Snake({ className = '' }) {
     const frame = (now) => {
       const k = Math.min((now - last) / (1000 / 60), 3) // frames passed, at 60fps; capped after a stall
       last = now
-      if (status === 'playing' && !calm) spawnFlames(flames.current, game.current.snake)
+      if (status === 'playing' && !calm) spawnFlames(flames.current, game.current.snake, Boolean(fire.current))
       flames.current = burnFlames(flames.current, k)
       draw()
       if (status === 'playing' || flames.current.length) raf = requestAnimationFrame(frame)
@@ -151,6 +227,7 @@ export default function Snake({ className = '' }) {
       const head = { x: g.snake[0].x + g.dir.x, y: g.snake[0].y + g.dir.y }
       const offBoard = head.x < 0 || head.y < 0 || head.x >= GRID || head.y >= GRID
       if (offBoard || g.snake.some((part) => part.x === head.x && part.y === head.y)) {
+        g.over = true // the flame goes out; the last embers still burn down
         setStatus('over')
         return
       }
@@ -159,7 +236,10 @@ export default function Snake({ className = '' }) {
         g.score += 1
         setScore(g.score)
         g.food = placeFood(g.snake)
-        if (!g.food) setStatus('over') // filled the board: nowhere left to go
+        if (!g.food) {
+          g.over = true // filled the board: nowhere left to go
+          setStatus('over')
+        }
       } else {
         g.snake.pop()
       }
