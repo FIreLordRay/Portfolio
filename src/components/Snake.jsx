@@ -24,14 +24,18 @@ function placeFood(snake) {
 }
 
 /**
- * The fire on the tail: a looping Lottie flame (fire.json, from LottieFiles) sitting on the
- * tail, with embers that cool from gold to orange to deep red as they burn out. Until the
- * flame has loaded, or if it can't, the embers burn on their own.
+ * The snake is made of fire: every block is a looping Lottie flame (fire.json, from
+ * LottieFiles), each a few frames apart so they flicker on their own, and embers cool off the
+ * tail from gold to orange to deep red. Until the flame has loaded, or if it can't, the blocks
+ * are plain squares and the embers burn on their own.
  */
 const FLAME_COLORS = ['#fbbf24', '#f59e0b', '#c2410c']
 const FIRE_FPS = 24 // the Lottie flame's own frame rate
-const FIRE_PX = 96 // each flame frame is pictured this big, then scaled onto the board
-const FIRE_SIZE = CELL * 3 // how big the flame stands on the board
+const FIRE_PX = 160 // each flame frame is pictured this big, then cropped and scaled onto the board
+const FIRE_CROP = 0.55 // keep the bottom of the flame, its body, and leave the loose tongues above
+const BLOCK_W = CELL * 1.25 // a flame block is a little wider than its cell, so the body joins up
+const BLOCK_H = CELL * 1.6 // and taller, licking up into the cell above
+const HEAD_SCALE = 1.3 // the head burns bigger
 
 /** Where the tail ends, in board pixels, and the way it points (away from the body). */
 function tailEnd(snake) {
@@ -60,8 +64,8 @@ function spawnFlames(flames, snake, sparks) {
 }
 
 /**
- * Loads the Lottie flame and plays it once, off screen, keeping a picture of every frame so the
- * game can stamp them on the board without running the player each frame.
+ * Loads the Lottie flame and plays it once, off screen, keeping a picture of every frame (cropped
+ * to the flame's body) so the game can stamp them on the board without running the player.
  */
 async function loadFireFrames() {
   const [{ default: lottie }, { default: animationData }] = await Promise.all([
@@ -76,17 +80,39 @@ async function loadFireFrames() {
     const anim = lottie.loadAnimation({ container: holder, renderer: 'canvas', loop: false, autoplay: false, animationData })
     await new Promise((resolve) => anim.addEventListener('DOMLoaded', resolve))
     const source = holder.querySelector('canvas')
-    const frames = []
+    const full = []
+    // The box every frame's flame fits in: the animation leaves lots of empty space around it.
+    const box = { left: source.width, right: 0, top: source.height, bottom: 0 }
     for (let f = 0; f < anim.totalFrames; f++) {
       anim.goToAndStop(f, true)
       const frame = document.createElement('canvas')
       frame.width = source.width
       frame.height = source.height
-      frame.getContext('2d').drawImage(source, 0, 0)
-      frames.push(frame)
+      const ctx = frame.getContext('2d')
+      ctx.drawImage(source, 0, 0)
+      const pixels = ctx.getImageData(0, 0, frame.width, frame.height).data
+      for (let i = 3; i < pixels.length; i += 4) {
+        if (pixels[i] < 20) continue
+        const x = ((i - 3) / 4) % frame.width
+        const y = Math.floor((i - 3) / 4 / frame.width)
+        box.left = Math.min(box.left, x)
+        box.right = Math.max(box.right, x)
+        box.top = Math.min(box.top, y)
+        box.bottom = Math.max(box.bottom, y)
+      }
+      full.push(frame)
     }
     anim.destroy()
-    return frames
+
+    const width = box.right - box.left + 1
+    const height = Math.round((box.bottom - box.top + 1) * FIRE_CROP)
+    return full.map((frame) => {
+      const block = document.createElement('canvas')
+      block.width = width
+      block.height = height
+      block.getContext('2d').drawImage(frame, box.left, box.bottom + 1 - height, width, height, 0, 0, width, height)
+      return block
+    })
   } finally {
     holder.remove()
   }
@@ -142,7 +168,7 @@ export default function Snake({ className = '' }) {
       ctx.fill()
     }
 
-    // The flame goes under the snake, and glows: overlapping embers add up to brighter fire.
+    // The embers go under the snake, and glow: overlapping embers add up to brighter fire.
     ctx.globalCompositeOperation = 'lighter'
     for (const f of flames.current) {
       const left = f.life / f.max // 1 when new, 0 when burnt out
@@ -156,17 +182,33 @@ export default function Snake({ className = '' }) {
     ctx.globalCompositeOperation = 'source-over'
     ctx.globalAlpha = 1
 
-    // The Lottie flame stands on the tail, base first, while the snake is alive.
-    if (fire.current && !g.over) {
-      const end = tailEnd(g.snake)
-      const frame = fire.current[Math.floor(performance.now() / (1000 / FIRE_FPS)) % fire.current.length]
-      ctx.drawImage(frame, end.x - FIRE_SIZE / 2, end.y - FIRE_SIZE * 0.93, FIRE_SIZE, FIRE_SIZE)
+    const frames = fire.current
+    if (!frames) {
+      g.snake.forEach((part, i) => {
+        ctx.fillStyle = i === 0 ? color('--color-fg', '#f7f2ec') : color('--color-ember', '#c2410c')
+        ctx.fillRect(part.x * CELL + 1, part.y * CELL + 1, CELL - 2, CELL - 2)
+      })
+      return
     }
 
-    g.snake.forEach((part, i) => {
-      ctx.fillStyle = i === 0 ? color('--color-fg', '#f7f2ec') : color('--color-ember', '#c2410c')
-      ctx.fillRect(part.x * CELL + 1, part.y * CELL + 1, CELL - 2, CELL - 2)
-    })
+    // A flame per block, standing on the bottom of its cell. Tail first, so the head burns on top.
+    const tick = Math.floor(performance.now() / (1000 / FIRE_FPS))
+    for (let i = g.snake.length - 1; i >= 0; i--) {
+      const part = g.snake[i]
+      const scale = i === 0 ? HEAD_SCALE : 1
+      const w = BLOCK_W * scale
+      const h = BLOCK_H * scale
+      const x = (part.x + 0.5) * CELL - w / 2
+      const base = (part.y + 1.05) * CELL
+      ctx.drawImage(frames[(tick + i * 5) % frames.length], x, base - h, w, h)
+    }
+
+    // The head's white-hot core, so you can tell which end is which.
+    const head = g.snake[0]
+    ctx.fillStyle = color('--color-fg', '#f7f2ec')
+    ctx.beginPath()
+    ctx.arc((head.x + 0.5) * CELL, (head.y + 0.62) * CELL, CELL * 0.2, 0, Math.PI * 2)
+    ctx.fill()
   }, [])
 
   // Fetch the Lottie flame once the page is idle, and only where the game shows (it's hidden on
