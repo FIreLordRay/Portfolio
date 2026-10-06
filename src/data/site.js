@@ -12,7 +12,6 @@ export const SITE = {
   email: 'rhall@icstars.org',
   github: 'https://github.com/FIreLordRay',
   url: 'https://firelordray.github.io/Portfolio/',
-  handle: '@FireLordRay',
 }
 
 /** The page dressed as an editor: each section is a "file" in the explorer and the tabs, in page order. */

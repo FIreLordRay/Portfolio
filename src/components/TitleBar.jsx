@@ -10,7 +10,7 @@ export default function TitleBar() {
         <span className="size-3 rounded-full bg-[#febc2e]" />
         <span className="size-3 rounded-full bg-[#28c840]" />
       </div>
-      <p className="flex-1 truncate text-center">firelordray · portfolio</p>
+      <p className="flex-1 truncate text-center">RayMond · portfolio</p>
       <a href={SITE.github} aria-label={`${SITE.fullName} on GitHub`} className="flex rounded p-1 transition-colors hover:text-fg">
         <GitHubIcon className="size-4" />
       </a>

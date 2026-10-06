@@ -12,10 +12,7 @@ export default function Explorer({ active }) {
     <aside className="border-b border-line bg-panel py-3 font-mono text-sm lg:sticky lg:top-10 lg:h-[calc(100vh-2.5rem)] lg:overflow-y-auto lg:border-r lg:border-b-0 lg:py-5">
       <a href="#top" className="flex items-center gap-3 px-5 pb-3 lg:mb-4 lg:border-b lg:border-line lg:pb-5">
         <img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" className="size-10 rounded-lg" />
-        <span>
-          <span className="block font-bold text-fg">{SITE.fullName}</span>
-          <span className="block text-xs text-muted">{SITE.handle}</span>
-        </span>
+        <span className="font-bold text-fg">{SITE.fullName}</span>
       </a>
 
       <p className="hidden px-5 pb-2 text-[0.7rem] tracking-[0.14em] text-muted lg:block">EXPLORER</p>

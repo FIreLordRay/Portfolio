@@ -35,7 +35,7 @@ export default function Contact() {
           <p>
             <span className="text-muted">→</span>{' '}
             <a href={SITE.github} className="border-b border-dashed border-accent text-accent hover:bg-accent-soft">
-              {SITE.github.replace('https://', '')}
+              RayMond on GitHub
             </a>
           </p>
           <p className="mt-2">
