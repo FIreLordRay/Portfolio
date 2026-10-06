@@ -33,6 +33,8 @@ Every push to `main` runs the tests and lint, then publishes (`.github/workflows
   the scramble effect on my name, now in `HyperText.jsx` (after Magic UI's HyperText, MIT).
 - Layout inspired by [braydentw.io](https://braydentw.io) by Brayden W., who asks that his
   site be used as inspiration rather than copied. The code here is my own.
+- The code-editor look (title bar, file explorer, tabs, snake game, terminal contact) is after
+  [Developer Portfolio V2](https://github.com/alexdeploy/developer-portfolio-v2) (MIT License).
 - The 3D keycaps are adapted from a keycap by 20essentials on [Uiverse.io](https://uiverse.io)
   (MIT License), the same ones as in [embertype](https://github.com/FIreLordRay/embertype).
 - The GitHub mark is from [Primer Octicons](https://github.com/primer/octicons) (MIT License).

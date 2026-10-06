@@ -5,6 +5,7 @@
   --color-bg: #100c0a;
   --color-bg-alt: #241c16;
   --color-card: #191310;
+  --color-panel: #0a0706; /* the editor's chrome: title bar, explorer, tabs, terminal */
   --color-line: #332a22;
   --color-fg: #f7f2ec;
   --color-muted: #a09488;
@@ -19,6 +20,14 @@
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
   --animate-float: float 7s ease-in-out infinite;
+  --animate-blink: blink 1s steps(1) infinite;
+
+  /* The terminal cursor after the tagline and at the contact prompt. */
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
 
   /* The hero's keycaps bob gently. Only `translate` moves, so each key's tilt (`rotate`)
      stays put, even with the animation turned off. */
@@ -47,9 +56,10 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
-  /* Section links shouldn't land under the top edge. */
-  section[id] {
-    scroll-margin-top: 1.5rem;
+  /* Section and project links shouldn't land under the sticky title bar and tabs. */
+  section[id],
+  article[id] {
+    scroll-margin-top: 6rem;
   }
 }
 
@@ -166,6 +176,7 @@
     scroll-behavior: auto;
   }
   .animate-float,
+  .animate-blink,
   .keycap-tap,
   .keycap-tap::before {
     animation: none;

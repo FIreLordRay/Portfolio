@@ -4,7 +4,7 @@ import SectionHeading from './SectionHeading.jsx'
 /** A few lines about me, in a card. */
 export default function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <section id="about" aria-labelledby="about-heading" className="py-20">
       <SectionHeading id="about-heading" path="about">
         About me.
       </SectionHeading>

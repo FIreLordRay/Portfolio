@@ -4,7 +4,7 @@ import SectionHeading from './SectionHeading.jsx'
 /** The tools I build with, as a row of keycaps (hover one and it sinks). */
 export default function Toolbelt() {
   return (
-    <section id="toolbelt" aria-labelledby="toolbelt-heading" className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <section id="toolbelt" aria-labelledby="toolbelt-heading" className="py-20">
       <SectionHeading id="toolbelt-heading" path="toolbelt">
         What I reach for when I build.
       </SectionHeading>

@@ -12,7 +12,17 @@ export const SITE = {
   email: 'rhall@icstars.org',
   github: 'https://github.com/FIreLordRay',
   url: 'https://firelordray.github.io/Portfolio/',
+  handle: '@FireLordRay',
 }
+
+/** The page dressed as an editor: each section is a "file" in the explorer and the tabs, in page order. */
+export const FILES = [
+  { id: 'top', name: 'README.md' },
+  { id: 'about', name: 'about.md' },
+  { id: 'projects', name: 'projects/' },
+  { id: 'toolbelt', name: 'toolbelt.json' },
+  { id: 'contact', name: 'contact.json' },
+]
 
 export const ABOUT = [
   'I am an aspiring software developer with a passion for creating innovative solutions. I am currently learning various programming languages and frameworks to build my skills.',

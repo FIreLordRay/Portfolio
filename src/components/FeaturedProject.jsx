@@ -10,7 +10,7 @@ import GitHubIcon from './GitHubIcon.jsx'
 export default function FeaturedProject({ project }) {
   const { name, year, pitch, description, highlights, tags, image, imageAlt, live, code } = project
   return (
-    <article className="grid gap-8 rounded-2xl border border-line bg-card/60 p-5 sm:p-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center lg:gap-12">
+    <article id={project.id} className="grid gap-8 rounded-2xl border border-line bg-card/60 p-5 sm:p-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center lg:gap-12">
       <figure className="overflow-hidden rounded-xl border border-line bg-bg shadow-2xl shadow-black/50">
         <div aria-hidden="true" className="flex items-center gap-1.5 border-b border-line px-3 py-2.5">
           <span className="size-2.5 rounded-full bg-line" />

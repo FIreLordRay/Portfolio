@@ -1,43 +1,47 @@
-import { Mail } from 'lucide-react'
 import { SITE } from '../data/site.js'
-import GitHubIcon from './GitHubIcon.jsx'
+import SectionHeading from './SectionHeading.jsx'
 
-/** The sign-off: an ember-lit card with my email and GitHub. */
+/** contact.json: my email and GitHub, as a terminal session. */
 export default function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-      <div className="relative overflow-hidden rounded-3xl border border-line bg-card px-6 py-16 text-center sm:px-12">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 left-1/2 h-64 w-[36rem] max-w-full -translate-x-1/2 rounded-full bg-ember/25 blur-3xl"
-        />
-        <div className="relative">
-          {/* The logo has its own dark, rounded tile: framed like an app icon on the card. */}
-          <img
-            src={`${import.meta.env.BASE_URL}favicon.svg`}
-            alt=""
-            className="mx-auto size-16 rounded-md shadow-lg ring-1 shadow-black/50 ring-line"
-          />
-          <h2 id="contact-heading" className="mt-6 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-            Want to build something <span className="text-accent">together</span>?
-          </h2>
-          <p className="mx-auto mt-3 max-w-md text-muted">I&apos;m always up for the next real project.</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href={`mailto:${SITE.email}`}
-              className="keycap inline-flex items-center gap-2 bg-accent font-semibold text-bg [--k:3rem] [--pad-x:1.1rem] [--pad-y:0.3rem]"
-            >
-              <Mail size={18} aria-hidden="true" />
-              <span>{SITE.email}</span>
+    <section id="contact" aria-labelledby="contact-heading" className="py-20">
+      <SectionHeading id="contact-heading" path="contact">
+        Want to build something <span className="text-accent">together</span>?
+      </SectionHeading>
+      <p className="-mt-6 mb-8 text-muted">I&apos;m always up for the next real project.</p>
+
+      <div className="max-w-3xl overflow-hidden rounded-xl border border-line bg-panel font-mono text-sm shadow-2xl shadow-black/40">
+        <div className="flex items-center gap-3 border-b border-line bg-card px-4 py-2.5 text-xs text-muted">
+          <span aria-hidden="true" className="flex gap-1.5">
+            <span className="size-2.5 rounded-full bg-line" />
+            <span className="size-2.5 rounded-full bg-line" />
+            <span className="size-2.5 rounded-full bg-line" />
+          </span>
+          bash: ~/contact
+        </div>
+        <div className="grid gap-2 p-5 sm:p-6">
+          <p>
+            <span className="text-accent">$</span> cat email.txt
+          </p>
+          <p>
+            <span className="text-muted">→</span>{' '}
+            <a href={`mailto:${SITE.email}`} className="border-b border-dashed border-accent text-accent hover:bg-accent-soft">
+              {SITE.email}
             </a>
-            <a
-              href={SITE.github}
-              className="keycap inline-flex items-center gap-2 bg-card font-semibold text-fg [--k:3rem] [--pad-x:1.1rem] [--pad-y:0.3rem]"
-            >
-              <GitHubIcon className="size-5" />
-              <span>GitHub</span>
+          </p>
+          <p className="mt-2">
+            <span className="text-accent">$</span> open github
+          </p>
+          <p>
+            <span className="text-muted">→</span>{' '}
+            <a href={SITE.github} className="border-b border-dashed border-accent text-accent hover:bg-accent-soft">
+              {SITE.github.replace('https://', '')}
             </a>
-          </div>
+          </p>
+          <p className="mt-2">
+            <span className="text-accent">$</span>
+            <span aria-hidden="true" className="ml-2 inline-block h-[1.1em] w-2 animate-blink bg-accent align-[-0.2em]" />
+          </p>
         </div>
       </div>
     </section>

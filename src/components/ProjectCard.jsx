@@ -10,7 +10,7 @@ import GitHubIcon from './GitHubIcon.jsx'
 export default function ProjectCard({ project }) {
   const { name, pitch, status, description, tags = [], code } = project
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-line bg-card/60 p-6 transition-colors hover:border-accent/50">
+    <article id={project.id} className="flex h-full flex-col rounded-2xl border border-line bg-card/60 p-6 transition-colors hover:border-accent/50">
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-xl font-bold tracking-tight">{name}</h3>
         {status && (
