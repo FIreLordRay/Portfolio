@@ -14,7 +14,8 @@
   --color-ember: #c2410c;
   --color-gold: #fbbf24;
 
-  --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  /* The whole site is set in the code font. */
+  --font-sans: "JetBrains Mono Variable", ui-monospace, monospace;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
   --animate-float: float 7s ease-in-out infinite;
