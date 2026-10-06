@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* FireLordRay "Dark Ember": the palette every one of my apps shares. */
+@theme {
+  --color-bg: #100c0a;
+  --color-bg-alt: #241c16;
+  --color-card: #191310;
+  --color-line: #332a22;
+  --color-fg: #f7f2ec;
+  --color-muted: #a09488;
+  --color-accent: #f59e0b;
+  --color-accent-dark: #d97706;
+  --color-accent-soft: #2e2410;
+  --color-ember: #c2410c;
+  --color-gold: #fbbf24;
+
+  --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  --animate-float: float 7s ease-in-out infinite;
+
+  /* The hero's keycaps bob gently. Only `translate` moves, so each key's tilt (`rotate`)
+     stays put, even with the animation turned off. */
+  @keyframes float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -12px;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 35%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  /* Section links shouldn't land under the top edge. */
+  section[id] {
+    scroll-margin-top: 1.5rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   KEYCAPS (the same ones as embertype)
+   A sculpted key: a lit top face on a darker skirt, with a soft drop shadow.
+   Adapted from "keycap" by 20essentials on Uiverse.io (MIT License): every size is a
+   fraction of --k (the key's height) and the shading is translucent black and white over the
+   key's own colour, so it works at any size and on any colour.
+   On a link or button it presses down while clicked; .keycap-hover presses on hover;
+   .keycap-tap plays one press (the hero's keys, when you type their letter).
+   ───────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  .keycap {
+    --k: 2.5em;
+    --keycap-ring: color-mix(in oklab, var(--color-line) 70%, black);
+    --keycap-pressed:
+      inset calc(var(--k) * -0.05) 0 calc(var(--k) * 0.05) rgb(0 0 0 / 0.1),
+      inset 0 calc(var(--k) * -0.05) calc(var(--k) * 0.05) rgb(0 0 0 / 0.15),
+      0 0 0 max(1px, calc(var(--k) * 0.025)) var(--keycap-ring),
+      calc(var(--k) * 0.03) calc(var(--k) * 0.06) calc(var(--k) * 0.1) rgb(0 0 0 / 0.25);
+    --keycap-pressed-face: calc(var(--k) * 0.0625) calc(var(--k) * 0.1375) calc(var(--k) * 0.1375) calc(var(--k) * 0.0625);
+    --keycap-pressed-face-shadow:
+      calc(var(--k) * -0.0625) calc(var(--k) * -0.0625) calc(var(--k) * 0.0625) rgb(255 255 255 / 0.15),
+      calc(var(--k) * 0.0625) calc(var(--k) * 0.04) calc(var(--k) * 0.0625) rgb(0 0 0 / 0.1);
+    position: relative;
+    overflow: hidden;
+    border-radius: calc(var(--k) * 0.125);
+    /* The top face sits up and to the left, so the content goes there. --pad-x and --pad-y
+       add room for keys with words on them. */
+    padding:
+      calc(var(--k) * 0.04 + var(--pad-y, 0px)) calc(var(--k) * 0.15 + var(--pad-x, 0px))
+      calc(var(--k) * 0.175 + var(--pad-y, 0px)) calc(var(--k) * 0.05 + var(--pad-x, 0px));
+    background-image: linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(0 0 0 / 0.15));
+    box-shadow:
+      inset calc(var(--k) * -0.1) 0 calc(var(--k) * 0.1) rgb(0 0 0 / 0.15),
+      inset 0 calc(var(--k) * -0.1) calc(var(--k) * 0.1) rgb(0 0 0 / 0.25),
+      0 0 0 max(1px, calc(var(--k) * 0.025)) var(--keycap-ring),
+      calc(var(--k) * 0.06) calc(var(--k) * 0.12) calc(var(--k) * 0.2) rgb(0 0 0 / 0.3);
+    transition:
+      transform 0.1s ease-in-out,
+      box-shadow 0.1s ease-in,
+      background-color 0.15s ease,
+      color 0.15s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* The top face. */
+  .keycap::before {
+    content: "";
+    position: absolute;
+    inset: calc(var(--k) * 0.04) calc(var(--k) * 0.15) calc(var(--k) * 0.175) calc(var(--k) * 0.05);
+    border-radius: calc(var(--k) * 0.125);
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.08), rgb(255 255 255 / 0.12));
+    box-shadow:
+      calc(var(--k) * -0.125) calc(var(--k) * -0.125) calc(var(--k) * 0.125) rgb(255 255 255 / 0.2),
+      calc(var(--k) * 0.125) calc(var(--k) * 0.06) calc(var(--k) * 0.125) rgb(0 0 0 / 0.15);
+    border: 1px solid rgb(0 0 0 / 0.25);
+    border-top-color: rgb(0 0 0 / 0.5);
+    border-right: 0;
+    pointer-events: none;
+    transition:
+      inset 0.1s ease-in-out,
+      box-shadow 0.1s ease-in-out;
+  }
+
+  /* Whatever is on the key sits on the face, above it. */
+  .keycap > * {
+    position: relative;
+    transition: transform 0.1s ease-in-out;
+  }
+
+  /* Pressed: the key sinks, its shadow tightens, the face grows into the skirt. */
+  .keycap:is(a[href], button):active,
+  .keycap-hover:hover {
+    transform: translateY(calc(var(--k) * 0.025));
+    box-shadow: var(--keycap-pressed);
+  }
+  .keycap:is(a[href], button):active::before,
+  .keycap-hover:hover::before {
+    inset: var(--keycap-pressed-face);
+    box-shadow: var(--keycap-pressed-face-shadow);
+  }
+  .keycap:is(a[href], button):active > *,
+  .keycap-hover:hover > * {
+    transform: translateY(calc(var(--k) * 0.0125));
+  }
+
+  .keycap-tap {
+    animation: keycap-tap 0.2s ease-out;
+  }
+  .keycap-tap::before {
+    animation: keycap-tap-face 0.2s ease-out;
+  }
+}
+
+@keyframes keycap-tap {
+  30% {
+    transform: translateY(calc(var(--k) * 0.025));
+    box-shadow: var(--keycap-pressed);
+  }
+}
+@keyframes keycap-tap-face {
+  30% {
+    inset: var(--keycap-pressed-face);
+    box-shadow: var(--keycap-pressed-face-shadow);
+  }
+}
+
+/* Reduced motion: nothing floats, scrolls smoothly or sinks. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float,
+  .keycap-tap,
+  .keycap-tap::before {
+    animation: none;
+  }
+  .keycap,
+  .keycap::before,
+  .keycap > * {
+    transition: none;
+  }
+}
