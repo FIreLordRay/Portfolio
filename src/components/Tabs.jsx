@@ -8,7 +8,7 @@ import { FILES } from '../data/site.js'
  */
 export default function Tabs({ active }) {
   return (
-    <nav aria-label="Open files" className="sticky top-10 z-20 hidden border-b border-line bg-panel font-mono text-xs lg:flex">
+    <nav aria-label="Open files" className="sticky top-[var(--header-h)] z-20 hidden border-b border-line bg-panel font-mono text-xs lg:flex">
       {FILES.map((file) => (
         <a
           key={file.id}

@@ -30,6 +30,8 @@ function placeFood(snake) {
  * are plain squares and the embers burn on their own.
  */
 const FLAME_COLORS = ['#fbbf24', '#f59e0b', '#c2410c']
+// The board is a dark screen in both site themes: the fire is drawn with additive blending, which only works on dark.
+const SCREEN = { '--color-panel': '#0a0706', '--color-accent': '#f59e0b', '--color-fg': '#f7f2ec', '--color-ember': '#c2410c' }
 const FIRE_FPS = 24 // the Lottie flame's own frame rate
 const FIRE_PX = 160 // each flame frame is pictured this big, then cropped and scaled onto the board
 const FIRE_CROP = 0.55 // keep the bottom of the flame, its body, and leave the loose tongues above
@@ -144,8 +146,7 @@ export default function Snake({ className = '' }) {
   const draw = useCallback(() => {
     const ctx = canvas.current?.getContext('2d')
     if (!ctx) return
-    const css = getComputedStyle(document.documentElement)
-    const color = (name, fallback) => css.getPropertyValue(name).trim() || fallback
+    const color = (name) => SCREEN[name]
 
     ctx.fillStyle = color('--color-panel', '#0a0706')
     ctx.fillRect(0, 0, SIZE, SIZE)

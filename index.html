@@ -6,14 +6,25 @@
     <title>RayMond Hall · Portfolio</title>
     <meta
       name="description"
-      content="RayMond Hall: aspiring software developer at i.c.stars, learning by shipping complete, real projects like embertype, Raybot and Tabster."
+      content="RayMond Hall: moving towards software development at i.c.stars, learning by shipping complete, real projects like embertype, Raybot and Tabster."
     />
     <meta name="theme-color" content="#100c0a" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      // Apply a saved light theme before the first paint, so it never flashes dark. Dark is the default.
+      try {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.dataset.theme = 'light'
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fbf7f2')
+        }
+      } catch (e) {
+        // Storage blocked: stay on dark.
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="RayMond Hall · Portfolio" />
-    <meta property="og:description" content="Aspiring software developer at i.c.stars. One real project at a time." />
+    <meta property="og:description" content="Moving towards software development at i.c.stars. One real project at a time." />
     <meta property="og:url" content="https://firelordray.github.io/Portfolio/" />
     <meta property="og:image" content="https://firelordray.github.io/Portfolio/og.png" />
     <meta name="twitter:card" content="summary" />

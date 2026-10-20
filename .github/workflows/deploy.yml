@@ -6,6 +6,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Rebuild every morning (UTC) so the asteroid data on the page stays current.
+  schedule:
+    - cron: '17 9 * * *'
 
 # One deployment at a time. A newer push waits for the one in progress instead of cutting it off.
 concurrency:
@@ -27,6 +30,18 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run lint
+      # Pull this week's asteroids from NASA into public/data/neows.json. The key is a repo secret and
+      # is only read here, at build time. A failed fetch never fails the deploy: the page shows a notice.
+      - run: node scripts/fetch-neows.mjs
+        env:
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+      # Pull my newest public commits into public/data/commits.json for the animated background. The
+      # token is the one GitHub gives every run, only here to lift the API rate limit. Like the step
+      # above, a failure never fails the deploy: the background just has no commits.
+      - run: node scripts/fetch-commits.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_OWNER: ${{ github.repository_owner }}
       # vite.config.js uses relative paths, so the build works at the site root as is.
       - run: npm run build
       - uses: actions/configure-pages@v6

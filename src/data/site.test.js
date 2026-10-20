@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { ABOUT, PROJECTS, SITE, TOOLBELT } from './site.js'
+import { ABOUT, FILES, MENU, PROJECTS, SITE, TOOLBELT } from './site.js'
 
 const isHttps = (url) => {
   try {
@@ -41,6 +41,34 @@ describe('site data', () => {
   })
 
   it('keeps the copy free of em dashes', () => {
-    expect(JSON.stringify({ SITE, ABOUT, PROJECTS, TOOLBELT })).not.toMatch(/—/)
+    expect(JSON.stringify({ SITE, ABOUT, PROJECTS, TOOLBELT, MENU })).not.toMatch(/—/)
+  })
+
+  describe('the header menu', () => {
+    const links = MENU.flatMap((item) => [item, item.cta, ...(item.columns ?? []).flatMap((c) => c.links)]).filter((l) => l?.href)
+
+    it('has a unique id and either a link or a dropdown for every item', () => {
+      expect(new Set(MENU.map((i) => i.id)).size).toBe(MENU.length)
+      for (const item of MENU) {
+        expect(item.label, item.id).toBeTruthy()
+        expect(Boolean(item.href) !== Boolean(item.columns), `${item.id} needs an href or columns, not both`).toBe(true)
+        if (item.columns) {
+          for (const field of ['eyebrow', 'blurb', 'cta']) expect(item[field], `${item.id}.${field}`).toBeTruthy()
+          for (const column of item.columns) expect(column.links.length, `${item.id}/${column.title}`).toBeGreaterThan(0)
+        }
+      }
+    })
+
+    it('points every in-page link at a section or project that exists', () => {
+      const ids = new Set([...FILES.map((f) => f.id), ...PROJECTS.map((p) => p.id)])
+      for (const link of links.filter((l) => l.href.startsWith('#'))) expect(ids.has(link.href.slice(1)), link.href).toBe(true)
+    })
+
+    it('sends every other link to an https address, opened in a new tab', () => {
+      for (const link of links.filter((l) => !l.href.startsWith('#'))) {
+        expect(isHttps(link.href), link.href).toBe(true)
+        expect(link.external, link.href).toBe(true)
+      }
+    })
   })
 })

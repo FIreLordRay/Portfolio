@@ -3,3 +3,8 @@ dist
 *.local
 .vite
 coverage
+# Written at build time by scripts/fetch-neows.mjs
+public/data/neows.json
+# Written at build time by scripts/fetch-commits.mjs
+public/data/commits.json
+.idea

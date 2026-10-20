@@ -5,11 +5,13 @@ import Explorer from './components/Explorer.jsx'
 import FeaturedProject from './components/FeaturedProject.jsx'
 import Footer from './components/Footer.jsx'
 import Hero from './components/Hero.jsx'
+import NeoWs from './components/NeoWs.jsx'
 import ProjectCard from './components/ProjectCard.jsx'
 import SectionHeading from './components/SectionHeading.jsx'
 import Tabs from './components/Tabs.jsx'
-import TitleBar from './components/TitleBar.jsx'
+import SiteHeader from './components/SiteHeader.jsx'
 import Toolbelt from './components/Toolbelt.jsx'
+import SpaceBackground from './background/SpaceBackground.jsx'
 import { FILES, PROJECTS, SITE } from './data/site.js'
 import useActiveSection from './useActiveSection.js'
 
@@ -26,6 +28,7 @@ export default function App() {
 
   return (
     <>
+      <SpaceBackground />
       {/* Parked above the top edge until a keyboard user tabs to it. */}
       <a
         href="#main"
@@ -33,7 +36,7 @@ export default function App() {
       >
         Skip to content
       </a>
-      <TitleBar />
+      <SiteHeader />
       <div className="lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
         <Explorer active={active} />
         <div className="min-w-0">
@@ -65,6 +68,7 @@ export default function App() {
                 </a>
               </section>
 
+              <NeoWs />
               <Toolbelt />
               <Contact />
             </main>

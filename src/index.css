@@ -42,6 +42,28 @@
   }
 }
 
+/* Dark is the site's own look. The toggle in the header sets data-theme="light" on <html>, which swaps
+   in the same warm palette on cream. Text colours were picked to pass contrast on their backgrounds. */
+:root {
+  color-scheme: dark;
+  --header-h: 3.5rem; /* the sticky header's height: the tabs and the explorer sit just below it */
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #fbf7f2;
+  --color-bg-alt: #f1e8dd;
+  --color-card: #ffffff;
+  --color-panel: #f3ece3;
+  --color-line: #e2d6c8;
+  --color-fg: #1c1511;
+  --color-muted: #6b5d52;
+  --color-accent: #a84c08;
+  --color-accent-dark: #8a3d06;
+  --color-accent-soft: #f7e6cc;
+  --color-ember: #c2410c;
+  --color-gold: #a84c08;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -56,10 +78,10 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
-  /* Section and project links shouldn't land under the sticky title bar and tabs. */
+  /* Section and project links shouldn't land under the sticky header and tabs. */
   section[id],
   article[id] {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: calc(var(--header-h) + 4rem);
   }
 }
 

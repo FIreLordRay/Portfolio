@@ -7,7 +7,7 @@
 export const SITE = {
   name: 'Ray',
   fullName: 'RayMond Hall',
-  tagline: 'Aspiring Software Developer',
+  tagline: 'Moving Towards Software Development',
   program: 'i.c.stars',
   email: 'rhall@icstars.org',
   github: 'https://github.com/FIreLordRay',
@@ -19,13 +19,68 @@ export const FILES = [
   { id: 'top', name: 'README.md' },
   { id: 'about', name: 'about.md' },
   { id: 'projects', name: 'projects/' },
+  { id: 'neows', name: 'neows.json' },
   { id: 'toolbelt', name: 'toolbelt.json' },
   { id: 'contact', name: 'contact.json' },
 ]
 
+/**
+ * The header's menu. An item with `columns` opens a dropdown (a lead blurb with one link, then columns
+ * of links); one with just an `href` is a plain link. A link's `href` is either "#id" for a part of this
+ * page (checked by the tests) or an https address, marked `external` so it opens in a new tab.
+ */
+export const MENU = [
+  {
+    id: 'projects',
+    label: 'Projects',
+    eyebrow: 'What I build',
+    blurb: 'One real project at a time, from a typing trainer to tools I use every day.',
+    cta: { label: 'See all projects', href: '#projects' },
+    columns: [
+      {
+        title: 'Featured',
+        links: [
+          { label: 'embertype', href: '#embertype' },
+          { label: 'Cascade', href: '#cascade' },
+        ],
+      },
+      {
+        title: 'Python',
+        links: [
+          { label: 'Raybot', href: '#raybot' },
+          { label: 'RayChat', href: '#raychat' },
+          { label: 'Radial', href: '#radial' },
+        ],
+      },
+      { title: 'Browser', links: [{ label: 'Tabster', href: '#tabster' }] },
+    ],
+  },
+  {
+    id: 'live',
+    label: 'Live demos',
+    eyebrow: 'Try it',
+    blurb: 'Things you can open and use right now.',
+    cta: { label: 'Open embertype', href: 'https://firelordray.github.io/embertype/', external: true },
+    columns: [
+      { title: 'Apps', links: [{ label: 'embertype', href: 'https://firelordray.github.io/embertype/', external: true }] },
+      {
+        title: 'On this page',
+        links: [
+          { label: 'NeoWs asteroid feed', href: '#neows' },
+          { label: 'Snake', href: '#top' },
+        ],
+      },
+    ],
+  },
+  { id: 'about', label: 'About', href: '#about' },
+  { id: 'contact', label: 'Contact', href: '#contact' },
+]
+
 export const ABOUT = [
-  'I am an aspiring software developer with a passion for creating innovative solutions. I am currently learning various programming languages and frameworks to build my skills.',
-  "Right now I'm at i.c.stars (Cycle 60), where my internship project is Cascade, built for Medline. Outside of that I build tools I actually use, one real project at a time.",
+  'I got into coding because it connects so many things I already love: Legos, cars and, most of all, skateboarding. Building, figuring out how things work, and getting better one try at a time is something I already knew from all three.',
+  "When I'm not at a keyboard, I'm outside. You'll usually find me at the lake or downtown. I love being outdoors.",
+  "Right now I'm at i.c.stars (Cycle 60), moving towards a career in software development. My internship project is Cascade, built for Medline. So far I build things that solve my own problems, and I want to build on a larger scale, things that help a bigger audience. What keeps me going is wanting to know more, because the more I know, the more I'm able to do.",
+  "If you're looking at my portfolio, I want you to know I'm not perfect, but I will do everything I can to get the best result.",
 ]
 
 /**
