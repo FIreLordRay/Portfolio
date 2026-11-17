@@ -5,13 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RayMond Hall · Links</title>
 <meta name="description" content="RayMond Hall's live projects, portfolio and contact links.">
-<meta name="theme-color" content="#050506">
+<meta name="theme-color" content="#1a260f">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <style>
-  /* Palette from color-plate.com/164645: blues, stone and terracotta on near-black. */
+  /* Palette from color-plate.com/180845 ("Beyond the Green Hills"): olive and forest greens with a misty blue.
+     The background is a deeper forest than the palette's darkest (#2b3f19) so text reads well; --lime
+     is #839643 lightened for the same reason. */
   :root {
-    --bg: #050506; --card: #151518; --border: #2a2c33; --text: #ecebe6; --stone: #c2beb3;
-    --muted: #ada99f; --terra: #cd664e; --blue: #548dc3; --blue-2: #4382be; --navy: #3e5c96;
+    --bg: #1a260f; --card: #26361a; --border: #41541d; --text: #eef5fa; --muted: #a6b5c2; --mist: #c6ddec;
+    --forest: #2b3f19; --moss: #586b26; --olive: #6f8231; --leaf: #839643; --lime: #b4c46a; --sage: #69785a;
   }
   * { box-sizing: border-box; }
   body {
@@ -19,11 +21,11 @@
     font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
 
-  /* Three soft lights drifting behind everything. */
-  .glow { position: fixed; border-radius: 50%; filter: blur(70px); opacity: .55; pointer-events: none; z-index: 0; }
-  .g1 { width: 340px; height: 340px; background: var(--navy); top: -120px; left: -80px; animation: drift 14s ease-in-out infinite; }
-  .g2 { width: 260px; height: 260px; background: var(--terra); top: 38%; right: -110px; opacity: .35; animation: drift 18s ease-in-out infinite reverse; }
-  .g3 { width: 300px; height: 300px; background: var(--blue-2); bottom: -140px; left: 10%; opacity: .35; animation: drift 16s ease-in-out infinite; }
+  /* Three soft lights drifting behind everything, like light over hills. */
+  .glow { position: fixed; border-radius: 50%; filter: blur(70px); opacity: .5; pointer-events: none; z-index: 0; }
+  .g1 { width: 340px; height: 340px; background: var(--olive); top: -120px; left: -80px; animation: drift 14s ease-in-out infinite; }
+  .g2 { width: 260px; height: 260px; background: var(--mist); top: 38%; right: -110px; opacity: .18; animation: drift 18s ease-in-out infinite reverse; }
+  .g3 { width: 300px; height: 300px; background: var(--moss); bottom: -140px; left: 10%; opacity: .45; animation: drift 16s ease-in-out infinite; }
   @keyframes drift { 50% { transform: translate(40px, 30px) scale(1.12); } }
 
   main { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 44px 16px 48px; }
@@ -31,54 +33,54 @@
   header { text-align: center; }
   .ring {
     width: 128px; height: 128px; margin: 0 auto; padding: 4px; border-radius: 50%;
-    background: conic-gradient(from var(--a, 0deg), var(--blue), var(--terra), var(--navy), var(--blue));
-    animation: spin 6s linear infinite; box-shadow: 0 0 40px -6px var(--blue);
+    background: conic-gradient(from var(--a, 0deg), var(--lime), var(--mist), var(--olive), var(--muted), var(--lime));
+    animation: spin 6s linear infinite; box-shadow: 0 0 40px -6px var(--leaf);
   }
   @property --a { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
   @keyframes spin { to { --a: 360deg; } }
   .ring img { display: block; width: 100%; height: 100%; border-radius: 50%; border: 3px solid var(--bg); object-fit: cover; }
   h1 {
     margin: 16px 0 4px; font-size: 2rem; letter-spacing: -.02em;
-    background: linear-gradient(90deg, var(--text), var(--stone) 40%, var(--blue)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    background: linear-gradient(90deg, var(--text), var(--mist) 45%, var(--lime)); -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   header p { margin: 0; color: var(--muted); }
   .pill {
     display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 5px 12px; border-radius: 999px;
-    font-size: .8rem; color: var(--stone); background: rgba(205,102,78,.12); border: 1px solid rgba(205,102,78,.45);
+    font-size: .8rem; color: var(--lime); background: rgba(131,150,67,.15); border: 1px solid rgba(180,196,106,.45);
   }
-  .pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 0 0 var(--terra); animation: ping 1.8s ease-out infinite; }
-  @keyframes ping { 70%, 100% { box-shadow: 0 0 0 8px rgba(205,102,78,0); } }
+  .pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 0 var(--lime); animation: ping 1.8s ease-out infinite; }
+  @keyframes ping { 70%, 100% { box-shadow: 0 0 0 8px rgba(180,196,106,0); } }
 
   /* Quick contact buttons under the name. */
   .quick { display: flex; justify-content: center; gap: 12px; margin: 22px 0 6px; }
   .quick a {
-    display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: var(--text);
+    display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: var(--mist);
     background: var(--card); border: 1px solid var(--border); transition: transform .15s, border-color .15s, background .15s;
   }
-  .quick a:hover, .quick a:focus-visible { transform: translateY(-3px); border-color: var(--blue); background: #1b2433; outline: none; }
+  .quick a:hover, .quick a:focus-visible { transform: translateY(-3px); border-color: var(--lime); background: #2f4220; outline: none; }
   .quick svg { width: 22px; height: 22px; }
 
-  h2 { display: flex; align-items: center; gap: 10px; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 30px 0 12px; }
+  h2 { display: flex; align-items: center; gap: 10px; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--lime); margin: 30px 0 12px; }
   h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 
   a.link {
     display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 16px; text-decoration: none; color: inherit;
-    background: rgba(21,21,24,.82); border: 1px solid var(--border); backdrop-filter: blur(6px);
+    background: rgba(38,54,26,.85); border: 1px solid var(--border); backdrop-filter: blur(6px);
     transition: border-color .15s, transform .15s, background .15s;
     animation: rise .5s ease-out both; animation-delay: calc(var(--i) * 60ms);
   }
   @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
-  a.link:hover, a.link:focus-visible { border-color: var(--c, var(--blue)); background: #1a1b20; transform: translateY(-2px); outline: none; }
+  a.link:hover, a.link:focus-visible { border-color: var(--c, var(--lime)); background: #2f4220; transform: translateY(-2px); outline: none; }
   .text { flex: 1; min-width: 0; }
   a.link strong { display: block; font-size: 1.02rem; }
   a.link span.sub { display: block; color: var(--muted); font-size: .88rem; }
   .arrow { flex: none; color: var(--muted); transition: transform .15s, color .15s; }
-  a.link:hover .arrow, a.link:focus-visible .arrow { transform: translateX(3px); color: var(--c, var(--blue)); }
+  a.link:hover .arrow, a.link:focus-visible .arrow { transform: translateX(3px); color: var(--c, var(--lime)); }
 
   /* Pulse gets a moving gradient border. */
-  a.featured { position: relative; border-color: transparent; background: linear-gradient(#1c1414, #1c1414) padding-box, linear-gradient(var(--a, 0deg), var(--terra), var(--blue), var(--terra)) border-box; animation: rise .5s ease-out both, spin 5s linear infinite; }
-  .badge { display: inline-block; font-size: .68rem; font-weight: 700; font-style: normal; color: var(--bg); background: var(--terra); border-radius: 999px; padding: 1px 8px; margin-left: 6px; vertical-align: 2px; }
+  a.featured { position: relative; border-color: transparent; border-width: 2px; background: linear-gradient(#2c3f1c, #2c3f1c) padding-box, linear-gradient(var(--a, 0deg), var(--lime), var(--mist), var(--olive), var(--lime)) border-box; animation: rise .5s ease-out both, spin 5s linear infinite; }
+  .badge { display: inline-block; font-size: .68rem; font-weight: 700; font-style: normal; color: var(--forest); background: var(--mist); border-radius: 999px; padding: 1px 8px; margin-left: 6px; vertical-align: 2px; }
 
   footer { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 34px; }
 
@@ -113,15 +115,15 @@
   <!-- To add a link: copy one <li>, change the href, color (--c) and text, and bump --i. -->
   <h2>Live projects</h2>
   <ul>
-    <li><a class="link featured" style="--i:0; --c:var(--terra)" href="https://firelordray.github.io/city-scorecard/">
+    <li><a class="link featured" style="--i:0; --c:var(--lime)" href="https://firelordray.github.io/city-scorecard/">
       <span class="text"><strong>Pulse <em class="badge">TechBash 2026</em></strong>
       <span class="sub">How well is Chicago serving your neighborhood? Grades from real city data</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
-    <li><a class="link" style="--i:1; --c:var(--blue)" href="https://firelordray.github.io/embertype/">
+    <li><a class="link" style="--i:1; --c:var(--mist)" href="https://firelordray.github.io/embertype/">
       <span class="text"><strong>embertype</strong>
       <span class="sub">A typing trainer that teaches you to touch type</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
-    <li><a class="link" style="--i:2; --c:var(--stone)" href="https://firelordray.github.io/speech-teleprompter/">
+    <li><a class="link" style="--i:2; --c:var(--leaf)" href="https://firelordray.github.io/speech-teleprompter/">
       <span class="text"><strong>Speech Teleprompter</strong>
       <span class="sub">Import a speech, set your pace, and present</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
@@ -129,11 +131,11 @@
 
   <h2>Runs on my machine</h2>
   <ul>
-    <li><a class="link" style="--i:3; --c:var(--blue-2)" href="../raybot/#discord">
+    <li><a class="link" style="--i:3; --c:var(--mist)" href="../raybot/#discord">
       <span class="text"><strong>Raybot on Discord</strong>
       <span class="sub">Chat with it, play music in voice, and race on Python quizzes</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
-    <li><a class="link" style="--i:4; --c:var(--terra)" href="../radial/">
+    <li><a class="link" style="--i:4; --c:var(--lime)" href="../radial/">
       <span class="text"><strong>Radial</strong>
       <span class="sub">A local-first backlog board that syncs with Plaky</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
@@ -141,7 +143,7 @@
 
   <h2>More about me</h2>
   <ul>
-    <li><a class="link" style="--i:5; --c:var(--blue)" href="../">
+    <li><a class="link" style="--i:5; --c:var(--mist)" href="../">
       <span class="text"><strong>Portfolio</strong>
       <span class="sub">All my projects and what they are built with</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
