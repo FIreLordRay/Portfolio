@@ -7,7 +7,7 @@
 export const THEME_KEY = 'theme'
 
 /** The browser-chrome colour for each theme (the address bar on phones), matching each palette's background. */
-export const THEME_COLORS = { dark: '#100c0a', light: '#fbf7f2' }
+export const THEME_COLORS = { dark: '#0c1213', light: '#f5f5ef' }
 
 /** "light" or "dark": anything else, including nothing, is dark. */
 export function readTheme(root = document.documentElement) {

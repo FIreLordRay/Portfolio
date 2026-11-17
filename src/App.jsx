@@ -8,23 +8,21 @@ import Hero from './components/Hero.jsx'
 import NeoWs from './components/NeoWs.jsx'
 import ProjectCard from './components/ProjectCard.jsx'
 import SectionHeading from './components/SectionHeading.jsx'
-import Tabs from './components/Tabs.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
 import Toolbelt from './components/Toolbelt.jsx'
 import SpaceBackground from './background/SpaceBackground.jsx'
-import { FILES, PROJECTS, SITE } from './data/site.js'
-import useActiveSection from './useActiveSection.js'
+import { PROJECTS, SITE } from './data/site.js'
+import usePage from './usePage.js'
 
 const featured = PROJECTS.filter((project) => project.image)
 const others = PROJECTS.filter((project) => !project.image)
-const SECTION_IDS = FILES.map((file) => file.id)
 
 /**
- * One page, dressed as a code editor: a title bar, the explorer down the left, tabs across
- * the top, and each section an open "file". All the words live in src/data/site.js.
+ * Dressed as a code editor: a title bar, the explorer down the left, and each file in it its
+ * own page, an open "file" (see usePage.js). All the words live in src/data/site.js.
  */
 export default function App() {
-  const active = useActiveSection(SECTION_IDS)
+  const active = usePage()
 
   return (
     <>
@@ -40,37 +38,36 @@ export default function App() {
       <div className="lg:grid lg:grid-cols-[16rem_minmax(0,1fr)]">
         <Explorer active={active} />
         <div className="min-w-0">
-          <Tabs active={active} />
           <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
             <main id="main">
-              <Hero />
-              <About />
-
-              <section id="projects" aria-labelledby="projects-heading" className="py-20">
-                <SectionHeading id="projects-heading" path="projects">
-                  Here&apos;s what I&apos;ve built.
-                </SectionHeading>
-                <div className="space-y-10">
-                  {featured.map((project) => (
-                    <FeaturedProject key={project.id} project={project} />
-                  ))}
-                </div>
-                <ul className="mt-10 grid gap-6 md:grid-cols-2">
-                  {others.map((project) => (
-                    <li key={project.id}>
-                      <ProjectCard project={project} />
-                    </li>
-                  ))}
-                </ul>
-                <a href={SITE.github} className="mt-8 inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-fg">
-                  everything else is on GitHub
-                  <ArrowRight size={16} aria-hidden="true" />
-                </a>
-              </section>
-
-              <NeoWs />
-              <Toolbelt />
-              <Contact />
+              {active === 'top' && <Hero />}
+              {active === 'about' && <About />}
+              {active === 'projects' && (
+                <section id="projects" aria-labelledby="projects-heading" className="py-20">
+                  <SectionHeading id="projects-heading" path="projects">
+                    Here&apos;s what I&apos;ve built.
+                  </SectionHeading>
+                  <div className="space-y-10">
+                    {featured.map((project) => (
+                      <FeaturedProject key={project.id} project={project} />
+                    ))}
+                  </div>
+                  <ul className="mt-10 grid gap-6 md:grid-cols-2">
+                    {others.map((project) => (
+                      <li key={project.id}>
+                        <ProjectCard project={project} />
+                      </li>
+                    ))}
+                  </ul>
+                  <a href={SITE.github} className="mt-8 inline-flex items-center gap-2 font-mono text-sm text-muted transition-colors hover:text-fg">
+                    everything else is on GitHub
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </a>
+                </section>
+              )}
+              {active === 'neows' && <NeoWs />}
+              {active === 'toolbelt' && <Toolbelt />}
+              {active === 'contact' && <Contact />}
             </main>
             <Footer />
           </div>

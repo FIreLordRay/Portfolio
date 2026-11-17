@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
-/* FireLordRay "Dark Ember": the palette every one of my apps shares. */
+/* Palette from color-plate.com/146265 ("TCLGreen"): sky and steel blues, olive and tan on near-black.
+   Muted and ember are lightened palette tones so text passes contrast. */
 @theme {
-  --color-bg: #100c0a;
-  --color-bg-alt: #241c16;
-  --color-card: #191310;
-  --color-panel: #0a0706; /* the editor's chrome: title bar, explorer, tabs, terminal */
-  --color-line: #332a22;
-  --color-fg: #f7f2ec;
-  --color-muted: #a09488;
-  --color-accent: #f59e0b;
-  --color-accent-dark: #d97706;
-  --color-accent-soft: #2e2410;
-  --color-ember: #c2410c;
-  --color-gold: #fbbf24;
+  --color-bg: #0c1213;
+  --color-bg-alt: #18262a;
+  --color-card: #121b1d;
+  --color-panel: #080d0e; /* the editor's chrome: title bar, explorer, terminal */
+  --color-line: #263a40;
+  --color-fg: #eef3f6;
+  --color-muted: #a99a78;
+  --color-accent: #7bace9;
+  --color-accent-dark: #41789c;
+  --color-accent-soft: #15263a;
+  --color-ember: #a3a35a;
+  --color-gold: #8abaef;
 
   /* The whole site is set in the code font. */
   --font-sans: "JetBrains Mono Variable", ui-monospace, monospace;
@@ -43,25 +44,25 @@
 }
 
 /* Dark is the site's own look. The toggle in the header sets data-theme="light" on <html>, which swaps
-   in the same warm palette on cream. Text colours were picked to pass contrast on their backgrounds. */
+   in the same palette on a pale olive-white. Text colours were picked to pass contrast on their backgrounds. */
 :root {
   color-scheme: dark;
-  --header-h: 3.5rem; /* the sticky header's height: the tabs and the explorer sit just below it */
+  --header-h: 3.5rem; /* the sticky header's height: the explorer sits just below it */
 }
 :root[data-theme="light"] {
   color-scheme: light;
-  --color-bg: #fbf7f2;
-  --color-bg-alt: #f1e8dd;
+  --color-bg: #f5f5ef;
+  --color-bg-alt: #e9ebe0;
   --color-card: #ffffff;
-  --color-panel: #f3ece3;
-  --color-line: #e2d6c8;
-  --color-fg: #1c1511;
-  --color-muted: #6b5d52;
-  --color-accent: #a84c08;
-  --color-accent-dark: #8a3d06;
-  --color-accent-soft: #f7e6cc;
-  --color-ember: #c2410c;
-  --color-gold: #a84c08;
+  --color-panel: #ecede3;
+  --color-line: #d5d8c9;
+  --color-fg: #0c1213;
+  --color-muted: #5a5834;
+  --color-accent: #2f6487;
+  --color-accent-dark: #24506d;
+  --color-accent-soft: #dce9f6;
+  --color-ember: #6d6a3e;
+  --color-gold: #2f6487;
 }
 
 @layer base {
@@ -78,10 +79,10 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
-  /* Section and project links shouldn't land under the sticky header and tabs. */
+  /* Section and project links shouldn't land under the sticky header. */
   section[id],
   article[id] {
-    scroll-margin-top: calc(var(--header-h) + 4rem);
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
   }
 }
 

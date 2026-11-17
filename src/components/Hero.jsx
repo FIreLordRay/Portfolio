@@ -37,6 +37,13 @@ export default function Hero() {
       />
 
       <div className="relative">
+        <img
+          src={`${import.meta.env.BASE_URL}me.jpg`}
+          alt={SITE.fullName}
+          width={400}
+          height={400}
+          className="mb-8 size-28 rounded-full border-4 border-accent object-cover shadow-[0_0_40px_-8px_var(--color-accent)] sm:size-36"
+        />
         <p className="font-mono text-sm text-accent">{'// hello, world'}</p>
         <h1
           id="hero-heading"
@@ -57,7 +64,7 @@ export default function Hero() {
           One <span className="text-accent">real project</span> at a <span className="text-accent">time</span>.
         </p>
         <p className="mt-3 max-w-xl text-pretty text-muted">
-          Not a software engineer yet, working on it. I learn by shipping complete, real things people can use.
+          Heading into software and tech sales. I learn by shipping complete, real things people can use.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a href="#projects" className="keycap inline-flex bg-accent font-semibold text-bg [--k:3rem] [--pad-x:1.2rem] [--pad-y:0.3rem]">

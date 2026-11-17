@@ -5,7 +5,7 @@ import { FILES, PROJECTS } from '../data/site.js'
  * the projects folder open. The file you're reading is lit. On small screens it folds into
  * a row of links under the title bar.
  *
- * @param {{ active: string }} props the id of the section on screen
+ * @param {{ active: string }} props the id of the page that is open
  */
 export default function Explorer({ active }) {
   return (

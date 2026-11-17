@@ -5,8 +5,8 @@ import useSpaceData from './useSpaceData.js'
 // Colours as "r,g,b", so each draw can pick its own opacity. Light mode uses deeper tones, and darkens the
 // planets by `shade`, so everything still shows on cream.
 const PALETTES = {
-  dark: { accent: '245,158,11', gold: '251,191,36', muted: '160,148,136', shade: 1 },
-  light: { accent: '168,76,8', gold: '217,119,6', muted: '107,93,82', shade: 0.55 },
+  dark: { accent: '123,172,233', gold: '138,186,239', muted: '149,131,95', shade: 1 },
+  light: { accent: '47,100,135', gold: '65,120,156', muted: '90,88,52', shade: 0.55 },
 }
 // Few on purpose: enough to feel alive without pulling the eye from the page.
 const MAX_ASTEROIDS = 14
@@ -15,7 +15,7 @@ const HOVER_RADIUS = 14
 
 /**
  * A fixed canvas behind the page: a slowly turning solar system, this week's real asteroids drifting
- * and spinning through it (size and speed come from NASA's data, hazardous ones are amber) and my
+ * and spinning through it (size and speed come from NASA's data, hazardous ones are blue) and my
  * recent commits rising like embers, each one showing its repo and message when the pointer is near.
  * It is decoration only, so it is hidden from screen readers, ignores the pointer, pauses when the tab is hidden, and holds still for anyone who
  * has asked their device to reduce motion.
