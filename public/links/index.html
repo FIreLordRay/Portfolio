@@ -70,10 +70,6 @@
   }
   @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
   a.link:hover, a.link:focus-visible { border-color: var(--c, var(--blue)); background: #1a1b20; transform: translateY(-2px); outline: none; }
-  .tile {
-    flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
-    font-weight: 800; font-size: 1.1rem; color: var(--bg); background: var(--c, var(--blue));
-  }
   .text { flex: 1; min-width: 0; }
   a.link strong { display: block; font-size: 1.02rem; }
   a.link span.sub { display: block; color: var(--muted); font-size: .88rem; }
@@ -114,21 +110,18 @@
     </nav>
   </header>
 
-  <!-- To add a link: copy one <li>, change the href, letter, color (--c) and text, and bump --i. -->
+  <!-- To add a link: copy one <li>, change the href, color (--c) and text, and bump --i. -->
   <h2>Live projects</h2>
   <ul>
     <li><a class="link featured" style="--i:0; --c:var(--terra)" href="https://firelordray.github.io/city-scorecard/">
-      <b class="tile" aria-hidden="true">P</b>
       <span class="text"><strong>Pulse <em class="badge">TechBash 2026</em></strong>
       <span class="sub">How well is Chicago serving your neighborhood? Grades from real city data</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
     <li><a class="link" style="--i:1; --c:var(--blue)" href="https://firelordray.github.io/embertype/">
-      <b class="tile" aria-hidden="true">E</b>
       <span class="text"><strong>embertype</strong>
       <span class="sub">A typing trainer that teaches you to touch type</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
     <li><a class="link" style="--i:2; --c:var(--stone)" href="https://firelordray.github.io/speech-teleprompter/">
-      <b class="tile" aria-hidden="true">S</b>
       <span class="text"><strong>Speech Teleprompter</strong>
       <span class="sub">Import a speech, set your pace, and present</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
@@ -137,12 +130,10 @@
   <h2>Runs on my machine</h2>
   <ul>
     <li><a class="link" style="--i:3; --c:var(--blue-2)" href="../raybot/#discord">
-      <b class="tile" aria-hidden="true">R</b>
       <span class="text"><strong>Raybot on Discord</strong>
       <span class="sub">Chat with it, play music in voice, and race on Python quizzes</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
     <li><a class="link" style="--i:4; --c:var(--terra)" href="../radial/">
-      <b class="tile" aria-hidden="true">R</b>
       <span class="text"><strong>Radial</strong>
       <span class="sub">A local-first backlog board that syncs with Plaky</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
@@ -151,7 +142,6 @@
   <h2>More about me</h2>
   <ul>
     <li><a class="link" style="--i:5; --c:var(--blue)" href="../">
-      <b class="tile" aria-hidden="true">✦</b>
       <span class="text"><strong>Portfolio</strong>
       <span class="sub">All my projects and what they are built with</span></span>
       <span class="arrow" aria-hidden="true">→</span></a></li>
