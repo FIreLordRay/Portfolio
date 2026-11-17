@@ -84,6 +84,30 @@
 
   footer { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 34px; }
 
+  /* "Share your contact info": a button under the name, and a pop-up shortly after the page opens. */
+  .share {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 18px; border-radius: 999px;
+    font-weight: 700; text-decoration: none; color: var(--forest); background: var(--mist);
+    box-shadow: 0 6px 24px -8px var(--mist); transition: transform .15s;
+  }
+  .share:hover, .share:focus-visible { transform: translateY(-2px); outline: 2px solid var(--lime); outline-offset: 3px; }
+  [hidden] { display: none !important; }
+  dialog {
+    width: min(420px, calc(100% - 32px)); margin: auto auto 16px; padding: 22px 20px 18px; border-radius: 20px;
+    color: var(--text); background: var(--card); border: 1px solid var(--lime); box-shadow: 0 20px 60px -10px #000;
+  }
+  dialog[open] { animation: rise .35s ease-out both; }
+  dialog::backdrop { background: rgba(10,16,6,.6); backdrop-filter: blur(3px); }
+  dialog h2 { all: unset; display: block; font-size: 1.25rem; font-weight: 800; color: var(--text); }
+  dialog p { margin: 8px 0 18px; color: var(--muted); }
+  dialog .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  dialog .share { margin: 0; flex: 1; justify-content: center; }
+  dialog button {
+    flex: none; padding: 10px 14px; border-radius: 999px; font: inherit; color: var(--muted);
+    background: transparent; border: 1px solid var(--border); cursor: pointer;
+  }
+  dialog button:hover, dialog button:focus-visible { color: var(--text); border-color: var(--muted); outline: none; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
@@ -98,7 +122,8 @@
     <div class="ring"><img src="me.jpg" alt="RayMond Hall" width="120" height="120"></div>
     <h1>RayMond Hall</h1>
     <p>Software Development &amp; Tech Sales · i.c.stars</p>
-    <div class="pill"><i aria-hidden="true"></i>Open to connect</div>
+    <div class="pill"><i aria-hidden="true"></i>Open to connect</div><br>
+    <a class="share" data-form href="#" target="_blank" rel="noopener" hidden>Share your contact info →</a>
     <nav class="quick" aria-label="Contact">
       <a href="../" aria-label="Portfolio" title="Portfolio">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
@@ -151,5 +176,38 @@
 
   <footer>Thanks for stopping by.</footer>
 </main>
+
+<dialog id="connect" aria-labelledby="connect-title">
+  <h2 id="connect-title">Great to meet you!</h2>
+  <p>Leave your name and how to reach you, and I'll follow up after TechBash. Takes 30 seconds.</p>
+  <div class="row">
+    <a class="share" data-form href="#" target="_blank" rel="noopener">Share my info →</a>
+    <button type="button" value="later">Maybe later</button>
+  </div>
+</dialog>
+
+<script>
+  // Paste the Google Form's share link here. While it's empty, the button and pop-up stay hidden.
+  const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe6L68S6NTL4XsSDfADK411FKPyKoz49q4N1SEZYqHnoWEPLQ/viewform'
+
+  // Storage can be blocked (private tabs, strict settings): then the pop-up just shows on every visit.
+  const remember = (store, key) => { try { store.setItem(key, '1') } catch {} }
+  const recalls = (store, key) => { try { return store.getItem(key) === '1' } catch { return false } }
+
+  if (FORM_URL.startsWith('https://')) {
+    const dialog = document.getElementById('connect')
+    for (const link of document.querySelectorAll('[data-form]')) {
+      link.href = FORM_URL
+      link.hidden = false
+      // Opening the form means they've seen it: don't ask again on this phone.
+      link.addEventListener('click', () => { remember(localStorage, 'shared-contact'); dialog.close() })
+    }
+    // "Maybe later" only quiets it for this visit.
+    dialog.querySelector('button').addEventListener('click', () => { remember(sessionStorage, 'later'); dialog.close() })
+    if (!recalls(localStorage, 'shared-contact') && !recalls(sessionStorage, 'later')) {
+      setTimeout(() => dialog.showModal(), 900)
+    }
+  }
+</script>
 </body>
 </html>
