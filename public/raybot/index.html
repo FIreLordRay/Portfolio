@@ -134,20 +134,46 @@
 <header class="hero">
   <div class="mark">&#129302;</div>
   <h1 class="hyper">Raybot</h1>
-  <p class="lede">A Python tutor that teaches, grades your code, explains what broke, and writes
-    new exercises when it runs out: running entirely on your own machine.</p>
+  <p class="lede">A Discord bot you can talk to: it chats, plays music in voice, and runs Python quizzes, all on a local model on my own machine.</p>
   <div class="pills">
     <span class="pill">Runs <b>100% locally</b></span>
     <span class="pill">Powered by <b>Ollama</b></span>
-    <span class="pill">No cloud API</span>
+    <span class="pill">Lives on <b>Discord</b></span>
   </div>
   <div class="cta-row">
-    <div class="glow"><a class="btn" href="#capabilities">See what it does</a></div>
+    <div class="glow"><a class="btn" href="#discord">See what it does</a></div>
     <a class="btn ghost" href="https://github.com/FIreLordRay/raybot">See the code</a>
   </div>
 </header>
 
 <main>
+  <section id="discord">
+    <div class="wrap">
+      <div class="kicker">Raybot on Discord</div>
+      <h2>Chat, music and Python quizzes in one bot</h2>
+      <p class="sub">Add it to a server and it hangs out with your group: answer questions, play music in voice, and run coding races.</p>
+      <h3 style="margin:26px 0 10px">Chat</h3>
+      <div class="cmds">
+        <div class="cmd"><code>@Raybot &lt;anything&gt;</code><span>Mention it with any question and it answers in the channel, as a warm, upbeat tutor running on a local model.</span></div>
+        <div class="cmd"><code>!firelordray</code><span>DMs you a personal 5-question quiz. Get one wrong and it explains what broke instead of handing you the answer.</span></div>
+      </div>
+      <h3 style="margin:26px 0 10px">Music</h3>
+      <div class="cmds">
+        <div class="cmd"><code>!play &lt;song or url&gt;</code><span>Joins your voice channel and plays it. Search words or a link, playlists too.</span></div>
+        <div class="cmd"><code>!queue · !np</code><span>What is coming up, and what is playing now.</span></div>
+        <div class="cmd"><code>!skip · !pause · !resume</code><span>Control playback for the whole channel.</span></div>
+        <div class="cmd"><code>!volume · !shuffle</code><span>Change the volume live, or shuffle the queue.</span></div>
+        <div class="cmd"><code>!stop</code><span>Clear the queue and leave. It also leaves on its own when the channel empties.</span></div>
+      </div>
+      <h3 style="margin:26px 0 10px">Quizzes</h3>
+      <div class="cmds">
+        <div class="cmd"><code>!quiz</code><span>Posts a race-mode problem. First working solution wins.</span></div>
+        <div class="cmd"><code>!leaderboard · !badges</code><span>Top solvers, and the achievements you have unlocked.</span></div>
+        <div class="cmd"><code>!progress · !categories</code><span>Shared progress, streaks and per-category completion.</span></div>
+      </div>
+    </div>
+  </section>
+
   <section id="running">
     <div class="wrap">
       <div class="kicker">See it running</div>
@@ -239,34 +265,6 @@
           <h4>Ships or retries</h4>
           <p>Anything that fails is thrown away and regenerated, up to three attempts. Broken problems never reach a learner.</p>
         </div>
-        
-      </div>
-    </div>
-  </section>
-
-  <section id="discord">
-    <div class="wrap">
-      <div class="kicker">Discord</div>
-      <h2>Eight commands</h2>
-      <p class="sub">The same brain, same database, different surface: whatever you solve
-        in Discord shows up in the dashboard and the CLI.</p>
-      <div class="cmds">
-        
-        <div class="cmd"><code>!quiz</code><span>Posts a race-mode problem in the channel. First working solution wins and it&#39;s marked solved for everyone.</span></div>
-        
-        <div class="cmd"><code>!firelordray</code><span>DMs you a personal 5-question quiz, optionally filtered by difficulty and category, and tracks your score over time.</span></div>
-        
-        <div class="cmd"><code>!progress</code><span>Shared curriculum progress and current streak.</span></div>
-        
-        <div class="cmd"><code>!categories</code><span>Every category with its per-category completion.</span></div>
-        
-        <div class="cmd"><code>!leaderboard</code><span>Top solvers, ranked by distinct problems solved.</span></div>
-        
-        <div class="cmd"><code>!badges</code><span>Your earned and still-locked achievement badges.</span></div>
-        
-        <div class="cmd"><code>!setquizchannel</code><span>Marks a channel as the one that gets the daily auto-posted question.</span></div>
-        
-        <div class="cmd"><code>!raybothelp</code><span>Lists the commands.</span></div>
         
       </div>
     </div>
