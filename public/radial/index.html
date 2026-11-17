@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radial · RayMond Hall</title>
+<meta name="description" content="Radial: a local-first backlog tool that mirrors from, and pushes to, Plaky.">
+<meta name="theme-color" content="#0b0d12">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+  :root { --bg: #0b0d12; --card: #12151c; --border: #232837; --text: #eef1f7; --muted: #9aa3b5; --accent: #4f8cff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background-image: radial-gradient(ellipse at top, #16213d 0%, transparent 55%); }
+  main { max-width: 900px; margin: 0 auto; padding: 40px 16px 56px; }
+  .kicker { color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 800; }
+  h1 { font-size: clamp(2rem, 6vw, 3rem); margin: 6px 0 8px; }
+  .pitch { color: var(--muted); font-size: 1.1rem; margin: 0 0 20px; }
+  img { width: 100%; border-radius: 14px; border: 1px solid var(--border); display: block; }
+  h2 { font-size: 1.2rem; margin: 32px 0 10px; }
+  ul.points { padding-left: 1.2em; color: var(--muted); }
+  ul.points li { margin: 6px 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+  .tags li { border: 1px solid var(--border); background: var(--card); border-radius: 999px; padding: 3px 12px; font-size: .85rem; color: var(--muted); }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .btn { display: inline-block; padding: 11px 18px; border-radius: 12px; text-decoration: none; font-weight: 700; border: 1px solid var(--accent); color: var(--text); }
+  .btn.primary { background: var(--accent); color: #fff; }
+  .btn:focus-visible, .btn:hover { filter: brightness(1.15); }
+  .note { color: var(--muted); font-size: .85rem; margin-top: 10px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">Project</div>
+  <h1>Radial</h1>
+  <p class="pitch">Local-First Backlog Tool</p>
+
+  <img src="../projects/radial.png" alt="Radial's backlog board: To do, In progress and Done columns of task cards, with priority tags and a sidebar.">
+  <p class="note">Shown with sample tasks. Radial runs on my own machine, so this is a screenshot, not a live copy.</p>
+
+  <h2>What it is</h2>
+  <p>A local-first backlog tool that mirrors from, and pushes to, Plaky, themed to match Raybot's dashboard. Pulls every space, board, and item your Plaky API key can see into its own SQLite database on an interval, then lets you build a real backlog against a board's actual sections, with no invented status enum. Built with FastAPI, SQLite, and vanilla JS, no build step, no framework.</p>
+
+  <h2>What it does</h2>
+  <ul class="points">
+    <li>Pulls Plaky every 5 minutes, plus a manual "Pull from Plaky" button</li>
+    <li>Drag cards between columns; the columns are the board's real Plaky sections</li>
+    <li>Pushes a locally created item into Plaky as a real item, in the section you put it in</li>
+    <li>Works with no Plaky key as a plain local kanban</li>
+    <li>A sync log of every pull and push, success or failure</li>
+  </ul>
+
+  <ul class="tags"><li>Python</li><li>FastAPI</li><li>SQLite</li><li>Vanilla JS</li></ul>
+
+  <div class="row">
+    <a class="btn primary" href="https://github.com/FIreLordRay/Radial">See the code</a>
+    <a class="btn" href="../links/">All my links</a>
+  </div>
+</main>
+</body>
+</html>

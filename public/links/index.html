@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RayMond Hall · Links</title>
+<meta name="description" content="RayMond Hall's live projects, portfolio and contact links.">
+<meta name="theme-color" content="#100c0a">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #100c0a; --card: #191310; --border: #332a22; --text: #f7f2ec;
+    --muted: #a09488; --accent: #f59e0b; --soft: #2e2410;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+    font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background-image: radial-gradient(ellipse at top, #2a1608 0%, transparent 60%);
+  }
+  main { max-width: 480px; margin: 0 auto; padding: 40px 16px 48px; }
+  header { text-align: center; margin-bottom: 28px; }
+  header img { width: 112px; height: 112px; border-radius: 50%; border: 3px solid var(--accent); background: var(--card); object-fit: cover; }
+  h1 { margin: 12px 0 4px; font-size: 1.6rem; }
+  header p { margin: 0; color: var(--muted); }
+  h2 { font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  a.link {
+    display: block; padding: 14px 16px; border-radius: 14px; text-decoration: none; color: inherit;
+    background: var(--card); border: 1px solid var(--border); transition: border-color .15s, transform .15s;
+  }
+  a.link:hover, a.link:focus-visible { border-color: var(--accent); transform: translateY(-1px); outline: none; }
+  a.link strong { display: block; font-size: 1.05rem; }
+  a.link span { color: var(--muted); font-size: .9rem; }
+  a.featured { background: var(--soft); border-color: var(--accent); }
+  .badge { display: inline-block; font-size: .7rem; font-weight: 700; color: var(--bg); background: var(--accent); border-radius: 999px; padding: 1px 8px; margin-left: 6px; vertical-align: 2px; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 32px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="me.jpg" alt="RayMond Hall" width="96" height="96">
+    <h1>RayMond Hall</h1>
+    <p>Aspiring Software Developer · i.c.stars</p>
+  </header>
+
+  <!-- To add a link: copy one <li> and change the href and text. -->
+  <h2>Live projects</h2>
+  <ul>
+    <li><a class="link featured" href="https://firelordray.github.io/city-scorecard/">
+      <strong>Pulse <em class="badge">TechBash 2026</em></strong>
+      <span>How well is Chicago serving your neighborhood? Grades from real city data</span></a></li>
+    <li><a class="link" href="https://firelordray.github.io/embertype/">
+      <strong>embertype</strong>
+      <span>A typing trainer that teaches you to touch type</span></a></li>
+    <li><a class="link" href="https://firelordray.github.io/speech-teleprompter/">
+      <strong>Speech Teleprompter</strong>
+      <span>Import a speech, set your pace, and present</span></a></li>
+  </ul>
+
+  <h2>Runs on my machine</h2>
+  <ul>
+    <li><a class="link" href="../raybot/#discord">
+      <strong>Raybot on Discord</strong>
+      <span>A Discord bot that quizzes you on Python, grades your code and explains what broke</span></a></li>
+    <li><a class="link" href="../radial/">
+      <strong>Radial</strong>
+      <span>A local-first backlog board that syncs with Plaky</span></a></li>
+  </ul>
+
+  <h2>More about me</h2>
+  <ul>
+    <li><a class="link" href="../">
+      <strong>Portfolio</strong>
+      <span>All my projects and what they are built with</span></a></li>
+    <li><a class="link" href="https://github.com/FIreLordRay">
+      <strong>GitHub</strong>
+      <span>The code behind everything here</span></a></li>
+    <li><a class="link" href="mailto:rhall@icstars.org">
+      <strong>Email me</strong>
+      <span>rhall@icstars.org</span></a></li>
+  </ul>
+
+  <footer>Thanks for stopping by.</footer>
+</main>
+</body>
+</html>
