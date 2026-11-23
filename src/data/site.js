@@ -115,7 +115,7 @@ export const LEADERSHIP = {
   heading: 'How I lead.',
   paragraphs: [
     'I lead by building first and bringing people with me. I set up the work so the team can move fast without breaking things, I write down the decisions so nobody has to guess, and I make sure everyone\'s work lands.',
-    "I'm the tech lead on Cascade, our i.c.stars internship project for Medline: an operations problem navigator that takes in incident reports, spots patterns across branches, and tracks problems to a fix. I started the project in October and have carried it since.",
+    "I'm the tech lead on Cascade, our i.c.stars internship project for Medline: an operations problem navigator that takes in incident reports, spots patterns across branches, and tracks problems to a fix. I started the project in October and have cared for it since.",
   ],
   points: [
     'Set up the team\'s workflow: I created the repository and built the checks that run on every pull request (server tests against a real SQL Server, client tests, and both Docker builds). A change only merges when everything passes.',
