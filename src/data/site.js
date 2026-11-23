@@ -142,6 +142,8 @@ export const PROJECTS = [
       'Pulse Rent: check a Chicago building before you rent it',
     ],
     tags: ['React', 'Vite', 'Chicago Data Portal', 'OpenStreetMap', 'GitHub Actions'],
+    image: 'projects/pulse.png',
+    imageAlt: 'The Pulse home page: a search box for a neighborhood or address, question cards, and a map of Chicago neighborhoods graded A to F.',
     live: 'https://firelordray.github.io/city-scorecard/',
     code: 'https://github.com/FIreLordRay/city-scorecard',
   },
