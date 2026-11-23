@@ -119,7 +119,6 @@ export const LEADERSHIP = {
   points: [
     'Set up our repo and the tests that check every change before it goes in',
     "Merged my teammates' work and kept the project running",
-    'Wrote the docs: test plan, demo script and design decisions',
     'Trained and onboarded new sales reps before I got into tech',
     'On the i.c.stars debate team',
   ],
