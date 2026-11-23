@@ -64,7 +64,9 @@ export default function Hero() {
           One <span className="text-accent">real project</span> at a <span className="text-accent">time</span>.
         </p>
         <p className="mt-3 max-w-xl text-pretty text-muted">
-          Heading into software and tech sales. I learn by shipping complete, real things people can use.
+          I spent years in sales, training new reps and running my own pipeline as a real estate broker, and now I build
+          real, working software. If you&apos;re hiring for tech sales, or a role between the customer and the engineers, this
+          site is for you.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a href="#projects" className="keycap inline-flex bg-accent font-semibold text-bg [--k:3rem] [--pad-x:1.2rem] [--pad-y:0.3rem]">

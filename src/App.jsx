@@ -9,9 +9,10 @@ import NeoWs from './components/NeoWs.jsx'
 import ProjectCard from './components/ProjectCard.jsx'
 import SectionHeading from './components/SectionHeading.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
+import Story from './components/Story.jsx'
 import Toolbelt from './components/Toolbelt.jsx'
 import SpaceBackground from './background/SpaceBackground.jsx'
-import { PROJECTS, SITE } from './data/site.js'
+import { BUSINESS, LEADERSHIP, PROJECTS, SITE } from './data/site.js'
 import usePage from './usePage.js'
 
 const featured = PROJECTS.filter((project) => project.image)
@@ -42,6 +43,8 @@ export default function App() {
             <main id="main">
               {active === 'top' && <Hero />}
               {active === 'about' && <About />}
+              {active === 'business' && <Story id="business" story={BUSINESS} />}
+              {active === 'leadership' && <Story id="leadership" story={LEADERSHIP} />}
               {active === 'projects' && (
                 <section id="projects" aria-labelledby="projects-heading" className="py-20">
                   <SectionHeading id="projects-heading" path="projects">

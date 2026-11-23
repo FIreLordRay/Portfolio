@@ -7,7 +7,7 @@
 export const SITE = {
   name: 'Ray',
   fullName: 'RayMond Hall',
-  tagline: 'Moving Towards Software Development & Tech Sales',
+  tagline: 'Tech sales, backed by someone who builds the software',
   program: 'i.c.stars',
   email: 'rhall@icstars.org',
   github: 'https://github.com/FIreLordRay',
@@ -18,6 +18,8 @@ export const SITE = {
 export const FILES = [
   { id: 'top', name: 'README.md' },
   { id: 'about', name: 'about.md' },
+  { id: 'business', name: 'business.md' },
+  { id: 'leadership', name: 'leadership.md' },
   { id: 'projects', name: 'projects/' },
   { id: 'neows', name: 'neows.json' },
   { id: 'toolbelt', name: 'toolbelt.json' },
@@ -40,6 +42,7 @@ export const MENU = [
       {
         title: 'Featured',
         links: [
+          { label: 'Pulse', href: '#pulse' },
           { label: 'embertype', href: '#embertype' },
           { label: 'Cascade', href: '#cascade' },
         ],
@@ -62,7 +65,14 @@ export const MENU = [
     blurb: 'Things you can open and use right now.',
     cta: { label: 'Open embertype', href: 'https://firelordray.github.io/embertype/', external: true },
     columns: [
-      { title: 'Apps', links: [{ label: 'embertype', href: 'https://firelordray.github.io/embertype/', external: true }] },
+      {
+        title: 'Apps',
+        links: [
+          { label: 'Pulse', href: 'https://firelordray.github.io/city-scorecard/', external: true },
+          { label: 'Pulse Rent', href: 'https://firelordray.github.io/pulse-rent/', external: true },
+          { label: 'embertype', href: 'https://firelordray.github.io/embertype/', external: true },
+        ],
+      },
       {
         title: 'On this page',
         links: [
@@ -73,6 +83,8 @@ export const MENU = [
     ],
   },
   { id: 'about', label: 'About', href: '#about' },
+  { id: 'business', label: 'Business', href: '#business' },
+  { id: 'leadership', label: 'Leadership', href: '#leadership' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ]
 
@@ -83,6 +95,32 @@ export const ABOUT = [
   "If you're looking at my portfolio, I want you to know I'm not perfect, but I will do everything I can to get the best result.",
 ]
 
+/** business.md: the sales side of me, and what it brings to tech sales. */
+export const BUSINESS = {
+  heading: 'Where I come from: sales.',
+  paragraphs: [
+    'Before I wrote code, I sold. As a real estate broker I built my own pipeline: finding leads, following up and closing, with no one handing me clients. I also trained and onboarded new sales reps, teaching them how to talk to customers and how to keep a pipeline moving.',
+    "That's why I'm heading into tech sales. I know the sales side, and now I know the build side too. When I talk about a product, I can explain what it actually does and how it helps the person using it, because I build products myself.",
+  ],
+  points: [
+    'Building a pipeline and following up, from my own real estate business',
+    'Training and onboarding new sales reps',
+    'Explaining technical products in plain language',
+    'Turning what a customer needs into something a team can build, as on Cascade for Medline',
+  ],
+}
+
+/** leadership.md: how I lead, with the places I've done it. */
+export const LEADERSHIP = {
+  heading: 'How I lead.',
+  paragraphs: ['I lead by building first and bringing people with me.'],
+  points: [
+    "Cascade, for Medline: our team's i.c.stars internship project. The code lives on my GitHub, and I review my teammates' pull requests before they go in.",
+    'Training sales reps: I onboarded new reps and got them selling, the same skill as getting a new teammate up to speed.',
+    'i.c.stars debate team: building an argument and defending it under pressure.',
+  ],
+}
+
 /**
  * @typedef {{ id: string, name: string, pitch?: string, status?: string, description: string,
  *             tags?: string[], highlights?: string[], year?: number, image?: string,
@@ -90,6 +128,23 @@ export const ABOUT = [
  * @type {Project[]} newest first
  */
 export const PROJECTS = [
+  {
+    id: 'pulse',
+    name: 'Pulse',
+    year: 2026,
+    pitch: 'My Tech Expo project: how well is Chicago serving its residents?',
+    description:
+      "Pulse turns the City of Chicago's open data into answers a resident can use. Type your neighborhood or address to get a report card on city services, how long 311 requests wait compared with the rest of the city, your ward and alderman, and the free clinics closest to you. It grades all 77 community areas A to F, and shows that the same 311 request takes longer to close in the poorest neighborhoods than in the richest. Pulse Rent, part of the same suite, checks a building's violations and complaints before you sign a lease.",
+    highlights: [
+      'All 77 community areas graded A to F on city services',
+      'Who waits longer: 311 wait times by neighborhood income',
+      'Health access map with city clinics and community health centers',
+      'Pulse Rent: check a Chicago building before you rent it',
+    ],
+    tags: ['React', 'Vite', 'Chicago Data Portal', 'OpenStreetMap', 'GitHub Actions'],
+    live: 'https://firelordray.github.io/city-scorecard/',
+    code: 'https://github.com/FIreLordRay/city-scorecard',
+  },
   {
     id: 'embertype',
     name: 'embertype',
