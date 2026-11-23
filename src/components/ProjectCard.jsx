@@ -8,7 +8,7 @@ import GitHubIcon from './GitHubIcon.jsx'
  * @param {{ project: import('../data/site.js').Project }} props
  */
 export default function ProjectCard({ project }) {
-  const { name, pitch, status, description, tags = [], code } = project
+  const { name, pitch, status, description, tags = [], live, code } = project
   return (
     <article id={project.id} className="flex h-full flex-col rounded-2xl border border-line bg-card/60 p-6 transition-colors hover:border-accent/50">
       <div className="flex items-start justify-between gap-3">
@@ -32,12 +32,22 @@ export default function ProjectCard({ project }) {
         </ul>
       )}
 
-      {code && (
-        <a href={code} className="mt-auto inline-flex items-center gap-2 pt-6 font-mono text-sm text-accent hover:underline">
-          <GitHubIcon className="size-4" />
-          View on GitHub
-          <ArrowRight size={14} aria-hidden="true" />
-        </a>
+      {(live || code) && (
+        <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-6">
+          {live && (
+            <a href={live} className="inline-flex items-center gap-2 font-mono text-sm text-accent hover:underline">
+              Try it
+              <ArrowRight size={14} aria-hidden="true" />
+            </a>
+          )}
+          {code && (
+            <a href={code} className="inline-flex items-center gap-2 font-mono text-sm text-accent hover:underline">
+              <GitHubIcon className="size-4" />
+              View on GitHub
+              <ArrowRight size={14} aria-hidden="true" />
+            </a>
+          )}
+        </div>
       )}
     </article>
   )
