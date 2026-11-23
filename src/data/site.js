@@ -113,10 +113,16 @@ export const BUSINESS = {
 /** leadership.md: how I lead, with the places I've done it. */
 export const LEADERSHIP = {
   heading: 'How I lead.',
-  paragraphs: ['I lead by building first and bringing people with me.'],
+  paragraphs: [
+    'I lead by building first and bringing people with me. I set up the work so the team can move fast without breaking things, I write down the decisions so nobody has to guess, and I make sure everyone\'s work lands.',
+    "I'm the tech lead on Cascade, our i.c.stars internship project for Medline: an operations problem navigator that takes in incident reports, spots patterns across branches, and tracks problems to a fix. I started the project in October and have carried it since.",
+  ],
   points: [
-    "Cascade, for Medline: our team's i.c.stars internship project. The code lives on my GitHub, and I review my teammates' pull requests before they go in.",
-    'Training sales reps: I onboarded new reps and got them selling, the same skill as getting a new teammate up to speed.',
+    'Set up the team\'s workflow: I created the repository and built the checks that run on every pull request (server tests against a real SQL Server, client tests, and both Docker builds). A change only merges when everything passes.',
+    "Got everyone's work in: I merged 13 of my teammates' pull requests, and 62 of the project's 65 merges overall, so the main branch always works.",
+    'Did the heavy lifting: about 126 of the project\'s roughly 180 commits are mine.',
+    'Wrote the decisions down: the test plan, the demo script, the total cost of ownership, the naming convention, the operations guide, and three design decision records, including "real data never leaves the machine."',
+    'Training sales reps: before tech, I trained and onboarded new sales reps and got them selling, the same skill as getting a new teammate up to speed.',
     'i.c.stars debate team: building an argument and defending it under pressure.',
   ],
 }
