@@ -114,16 +114,14 @@ export const BUSINESS = {
 export const LEADERSHIP = {
   heading: 'How I lead.',
   paragraphs: [
-    'I lead by building first and bringing people with me. I set up the work so the team can move fast without breaking things, I write down the decisions so nobody has to guess, and I make sure everyone\'s work lands.',
-    "I'm the tech lead on Cascade, our i.c.stars internship project for Medline: an operations problem navigator that takes in incident reports, spots patterns across branches, and tracks problems to a fix. I started the project in October and have cared for it since.",
+    "I'm the tech lead on Cascade, our i.c.stars internship project for Medline. I started it in October and have cared for it since. Mostly, I try to make it easy for the team to do good work.",
   ],
   points: [
-    'Set up the team\'s workflow: I created the repository and built the checks that run on every pull request (server tests against a real SQL Server, client tests, and both Docker builds). A change only merges when everything passes.',
-    "Got everyone's work in: I merged 13 of my teammates' pull requests, and 62 of the project's 65 merges overall, so the main branch always works.",
-    'Did the heavy lifting: about 126 of the project\'s roughly 180 commits are mine.',
-    'Wrote the decisions down: the test plan, the demo script, the total cost of ownership, the naming convention, the operations guide, and three design decision records, including "real data never leaves the machine."',
-    'Training sales reps: before tech, I trained and onboarded new sales reps and got them selling, the same skill as getting a new teammate up to speed.',
-    'i.c.stars debate team: building an argument and defending it under pressure.',
+    'Set up our repo and the tests that check every change before it goes in',
+    "Merged my teammates' work and kept the project running",
+    'Wrote the docs: test plan, demo script and design decisions',
+    'Trained and onboarded new sales reps before I got into tech',
+    'On the i.c.stars debate team',
   ],
 }
 
