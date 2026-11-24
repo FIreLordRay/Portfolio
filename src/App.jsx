@@ -12,7 +12,7 @@ import SiteHeader from './components/SiteHeader.jsx'
 import Story from './components/Story.jsx'
 import Toolbelt from './components/Toolbelt.jsx'
 import SpaceBackground from './background/SpaceBackground.jsx'
-import { BUSINESS, LEADERSHIP, PROJECTS, SITE } from './data/site.js'
+import { BUSINESS, CAREER, LEADERSHIP, PROJECTS, SITE, TECHNOLOGY, WELLNESS } from './data/site.js'
 import usePage from './usePage.js'
 
 const featured = PROJECTS.filter((project) => project.image)
@@ -45,6 +45,9 @@ export default function App() {
               {active === 'about' && <About />}
               {active === 'business' && <Story id="business" story={BUSINESS} />}
               {active === 'leadership' && <Story id="leadership" story={LEADERSHIP} />}
+              {active === 'technology' && <Story id="technology" story={TECHNOLOGY} />}
+              {active === 'career' && <Story id="career" story={CAREER} />}
+              {active === 'wellness' && <Story id="wellness" story={WELLNESS} />}
               {active === 'projects' && (
                 <section id="projects" aria-labelledby="projects-heading" className="py-20">
                   <SectionHeading id="projects-heading" path="projects">

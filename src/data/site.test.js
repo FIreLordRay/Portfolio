@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { ABOUT, BUSINESS, FILES, LEADERSHIP, MENU, PROJECTS, SITE, TOOLBELT } from './site.js'
+import { ABOUT, BUSINESS, CAREER, FILES, LEADERSHIP, MENU, PROJECTS, SITE, TECHNOLOGY, TOOLBELT, WELLNESS } from './site.js'
 
 const isHttps = (url) => {
   try {
@@ -41,7 +41,7 @@ describe('site data', () => {
   })
 
   it('keeps the copy free of em dashes', () => {
-    expect(JSON.stringify({ SITE, ABOUT, BUSINESS, LEADERSHIP, PROJECTS, TOOLBELT, MENU })).not.toMatch(/—/)
+    expect(JSON.stringify({ SITE, ABOUT, BUSINESS, LEADERSHIP, TECHNOLOGY, CAREER, WELLNESS, PROJECTS, TOOLBELT, MENU })).not.toMatch(/—/)
   })
 
   describe('the header menu', () => {
