@@ -91,7 +91,7 @@ export const MENU = [
 export const ABOUT = [
   'I got into coding because it connects so many things I already love: Legos, cars and, most of all, skateboarding. Building, figuring out how things work, and getting better one try at a time is something I already knew from all three.',
   "When I'm not at a keyboard, I'm outside. You'll usually find me at the lake or downtown. I love being outdoors.",
-  "Right now I'm at i.c.stars (Cycle 60), moving towards a career in software development and tech sales. My internship project is Cascade, built for Medline. Building my own projects means I understand technology from the inside, and I want to bring that to tech sales: knowing what a product really does and how it helps the people using it. So far I build things that solve my own problems, and I want to build on a larger scale, things that help a bigger audience. What keeps me going is wanting to know more, because the more I know, the more I'm able to do.",
+  "Right now I'm at i.c.stars (Cycle 60), moving towards a career in tech sales, backed by the software I build. My internship project is Cascade, built for Medline. Building my own projects means I understand technology from the inside, and I want to bring that to tech sales: knowing what a product really does and how it helps the people using it. So far I build things that solve my own problems, and I want to build on a larger scale, things that help a bigger audience. What keeps me going is wanting to know more, because the more I know, the more I'm able to do.",
   "If you're looking at my portfolio, I want you to know I'm not perfect, but I will do everything I can to get the best result.",
 ]
 
